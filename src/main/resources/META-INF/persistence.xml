@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="dart.restaurante.asados_Asados_jar_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>dart.restaurante.dao.Compra</class>
+    <class>dart.restaurante.dao.Comida</class>
+    <class>dart.restaurante.dao.VentaComida</class>
+    <class>dart.restaurante.dao.Cliente</class>
+    <class>dart.restaurante.dao.Usuario</class>
+    <class>dart.restaurante.dao.Producto</class>
+    <class>dart.restaurante.dao.Caja</class>
+    <class>dart.restaurante.dao.Apertura</class>
+    <class>dart.restaurante.dao.Gasto</class>
+    <class>dart.restaurante.dao.VentaProducto</class>
+    <class>dart.restaurante.dao.VentaDia</class>
+    <class>dart.restaurante.dao.Cierre</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://bknym9xt4zubxbwyhloe-mysql.services.clever-cloud.com:3306/bknym9xt4zubxbwyhloe?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+      <property name="javax.persistence.jdbc.user" value="ulr9dh68j9qeg3ic"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="HA9705trkoX9wdmYuOFe"/>
+    </properties>
+  </persistence-unit>
+</persistence>

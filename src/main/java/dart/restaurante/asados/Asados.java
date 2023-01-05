@@ -5,6 +5,8 @@
 
 package dart.restaurante.asados;
 
+//import dart.restaurante.views.Inicio;
+
 /**
  *
  * @author Diego Ramos
@@ -12,6 +14,7 @@ package dart.restaurante.asados;
 public class Asados {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+//        Inicio i = new Inicio();
+//        i.setVisible(true);
     }
 }
