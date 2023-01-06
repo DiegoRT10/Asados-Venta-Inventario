@@ -49,7 +49,7 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlFondo = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         pnlLeft = new javax.swing.JPanel();
         pnlInicio = new javax.swing.JPanel();
@@ -61,12 +61,8 @@ public class Inicio extends javax.swing.JFrame {
         imageAvatar1 = new com.raven.swing.ImageAvatar();
         pnlClientes = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        pnlFacturacion = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
         pnlSalirLogin = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
-        pnlProveedores = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
         pnlServicios = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         tpnlContenedor = new javax.swing.JTabbedPane();
@@ -126,7 +122,7 @@ public class Inicio extends javax.swing.JFrame {
         lblinfoKardex = new javax.swing.JLabel();
         lblTituloKardex = new javax.swing.JLabel();
         lblImgKardex = new javax.swing.JLabel();
-        lblKardex = new javax.swing.JLabel();
+        lblResumenVenta = new javax.swing.JLabel();
         pnlSeccionFacturacion = new javax.swing.JPanel();
         pnlTituloSeccionFacturacion = new javax.swing.JPanel();
         jLabel61 = new javax.swing.JLabel();
@@ -153,8 +149,9 @@ public class Inicio extends javax.swing.JFrame {
 
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/LogoMiniDespensaOlopa.png"))); // NOI18N
-        pnlFondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 0, 190, 90));
+        jLabel12.setFont(new java.awt.Font("Brush Script MT", 1, 36)); // NOI18N
+        jLabel12.setText("Asados");
+        pnlFondo.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 20, 100, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/head.jpg"))); // NOI18N
         pnlFondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 0, 970, 90));
@@ -325,45 +322,6 @@ public class Inicio extends javax.swing.JFrame {
 
         pnlLeft.add(pnlClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 350, 270, 50));
 
-        pnlFacturacion.setBackground(new java.awt.Color(129, 164, 220));
-        pnlFacturacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlFacturacion.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                pnlFacturacionMouseMoved(evt);
-            }
-        });
-        pnlFacturacion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlFacturacionMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlFacturacionMouseExited(evt);
-            }
-        });
-
-        jLabel11.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0books-couple_icon-icons.com_56313.png"))); // NOI18N
-        jLabel11.setText("  Libros");
-
-        javax.swing.GroupLayout pnlFacturacionLayout = new javax.swing.GroupLayout(pnlFacturacion);
-        pnlFacturacion.setLayout(pnlFacturacionLayout);
-        pnlFacturacionLayout.setHorizontalGroup(
-            pnlFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFacturacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11)
-                .addContainerGap(134, Short.MAX_VALUE))
-        );
-        pnlFacturacionLayout.setVerticalGroup(
-            pnlFacturacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlFacturacionLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        pnlLeft.add(pnlFacturacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 500, 270, 50));
-
         pnlSalirLogin.setBackground(new java.awt.Color(129, 164, 220));
         pnlSalirLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlSalirLogin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -403,45 +361,6 @@ public class Inicio extends javax.swing.JFrame {
 
         pnlLeft.add(pnlSalirLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 650, 260, 60));
 
-        pnlProveedores.setBackground(new java.awt.Color(129, 164, 220));
-        pnlProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlProveedores.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                pnlProveedoresMouseMoved(evt);
-            }
-        });
-        pnlProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnlProveedoresMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnlProveedoresMouseExited(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0proveedores_icon_152059.png"))); // NOI18N
-        jLabel8.setText("  Proveedores");
-
-        javax.swing.GroupLayout pnlProveedoresLayout = new javax.swing.GroupLayout(pnlProveedores);
-        pnlProveedores.setLayout(pnlProveedoresLayout);
-        pnlProveedoresLayout.setHorizontalGroup(
-            pnlProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProveedoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
-        );
-        pnlProveedoresLayout.setVerticalGroup(
-            pnlProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlProveedoresLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        pnlLeft.add(pnlProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 270, 50));
-
         pnlServicios.setBackground(new java.awt.Color(129, 164, 220));
         pnlServicios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlServicios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -479,7 +398,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlLeft.add(pnlServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 270, 50));
+        pnlLeft.add(pnlServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 270, 50));
 
         pnlFondo.add(pnlLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 270, 720));
 
@@ -881,9 +800,9 @@ public class Inicio extends javax.swing.JFrame {
 
         pnlSeccionServicios.add(pnlTituloSeccionServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 260, 60));
 
-        lblImgVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgVender.setIcon(new javax.swing.ImageIcon(getClass().getResource("/venta-comida.png"))); // NOI18N
         lblImgVender.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionServicios.add(lblImgVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 240, 110));
+        pnlSeccionServicios.add(lblImgVender, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 250, 110));
 
         lblinfoVender.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblinfoVender.setForeground(new java.awt.Color(153, 153, 153));
@@ -910,9 +829,9 @@ public class Inicio extends javax.swing.JFrame {
         lblinfoComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlSeccionServicios.add(lblinfoComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 310, 210, 160));
 
-        lblImgComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgComprar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/compra-comida.png"))); // NOI18N
         lblImgComprar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionServicios.add(lblImgComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 240, 110));
+        pnlSeccionServicios.add(lblImgComprar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 160, 250, 110));
 
         lblTituloComprar.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblTituloComprar.setForeground(new java.awt.Color(153, 153, 153));
@@ -936,22 +855,22 @@ public class Inicio extends javax.swing.JFrame {
 
         lblTituloKardex.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblTituloKardex.setForeground(new java.awt.Color(153, 153, 153));
-        lblTituloKardex.setText("Kardex");
+        lblTituloKardex.setText("Resumen Ventas");
         lblTituloKardex.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionServicios.add(lblTituloKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 100, -1));
+        pnlSeccionServicios.add(lblTituloKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 160, -1));
 
-        lblImgKardex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgKardex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resumen-ventas.png"))); // NOI18N
         lblImgKardex.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlSeccionServicios.add(lblImgKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 240, 110));
 
-        lblKardex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
-        lblKardex.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblKardex.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblResumenVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
+        lblResumenVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblResumenVenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblKardexMouseClicked(evt);
+                lblResumenVentaMouseClicked(evt);
             }
         });
-        pnlSeccionServicios.add(lblKardex, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 270, 340));
+        pnlSeccionServicios.add(lblResumenVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 270, 340));
 
         tpnlContenedor.addTab("tab6", pnlSeccionServicios);
 
@@ -1266,18 +1185,6 @@ public class Inicio extends javax.swing.JFrame {
      pnlSalirLogin.setBackground(new Color(129, 164, 220));
     }//GEN-LAST:event_pnlSalirLoginMouseExited
 
-    private void pnlFacturacionMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlFacturacionMouseExited
-       pnlFacturacion.setBackground(new Color(129, 164, 220));
-    }//GEN-LAST:event_pnlFacturacionMouseExited
-
-    private void pnlFacturacionMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlFacturacionMouseMoved
-      pnlFacturacion.setBackground(new Color(166, 173, 217));
-    }//GEN-LAST:event_pnlFacturacionMouseMoved
-
-    private void pnlFacturacionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlFacturacionMouseClicked
-     tpnlContenedor.setSelectedIndex(6);   
-    }//GEN-LAST:event_pnlFacturacionMouseClicked
-
     private void lblConsultarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultarMouseClicked
     
     }//GEN-LAST:event_lblConsultarMouseClicked
@@ -1285,18 +1192,6 @@ public class Inicio extends javax.swing.JFrame {
     private void lblConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultaMouseClicked
     
     }//GEN-LAST:event_lblConsultaMouseClicked
-
-    private void pnlProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedoresMouseClicked
-        tpnlContenedor.setSelectedIndex(4);
-    }//GEN-LAST:event_pnlProveedoresMouseClicked
-
-    private void pnlProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedoresMouseExited
-        pnlProveedores.setBackground(new Color(129, 164, 220));
-    }//GEN-LAST:event_pnlProveedoresMouseExited
-
-    private void pnlProveedoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedoresMouseMoved
-        pnlProveedores.setBackground(new Color(166, 173, 217));
-    }//GEN-LAST:event_pnlProveedoresMouseMoved
 
     private void lblConsultar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultar1MouseClicked
         
@@ -1331,9 +1226,9 @@ public class Inicio extends javax.swing.JFrame {
         pnlServicios.setBackground(new Color(166, 173, 217));
     }//GEN-LAST:event_pnlServiciosMouseMoved
 
-    private void lblKardexMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblKardexMouseClicked
+    private void lblResumenVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResumenVentaMouseClicked
         
-    }//GEN-LAST:event_lblKardexMouseClicked
+    }//GEN-LAST:event_lblResumenVentaMouseClicked
 
     private void lblLibroVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLibroVentasMouseClicked
         
@@ -1383,11 +1278,10 @@ public class Inicio extends javax.swing.JFrame {
     private com.raven.swing.ImageAvatar imageAvatar1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel25;
@@ -1400,7 +1294,6 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
@@ -1431,9 +1324,9 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblInfoConsultar1;
     private javax.swing.JLabel lblInfoConsultar2;
     private javax.swing.JLabel lblInfoInicio;
-    private javax.swing.JLabel lblKardex;
     private javax.swing.JLabel lblLibroCompras;
     private javax.swing.JLabel lblLibroVentas;
+    private javax.swing.JLabel lblResumenVenta;
     private javax.swing.JLabel lblSalirLogin;
     private javax.swing.JLabel lblSalirPrograma;
     private javax.swing.JLabel lblTituloComprar;
@@ -1455,12 +1348,10 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblinfoLibroVentas;
     private javax.swing.JLabel lblinfoVender;
     private javax.swing.JPanel pnlClientes;
-    private javax.swing.JPanel pnlFacturacion;
     private javax.swing.JPanel pnlFondo;
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlInventario;
     private javax.swing.JPanel pnlLeft;
-    private javax.swing.JPanel pnlProveedores;
     private javax.swing.JPanel pnlSalirLogin;
     private javax.swing.JPanel pnlSeccionClientes;
     private javax.swing.JPanel pnlSeccionFacturacion;
