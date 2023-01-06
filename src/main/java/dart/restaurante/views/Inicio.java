@@ -984,11 +984,11 @@ public class Inicio extends javax.swing.JFrame {
         pnlSeccionSalir.setBackground(new java.awt.Color(255, 255, 255));
         pnlSeccionSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        lblImgSalirPrograma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgSalirPrograma.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salir-programa.png"))); // NOI18N
         lblImgSalirPrograma.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlSeccionSalir.add(lblImgSalirPrograma, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 130, 200, 80));
 
-        lblImgSalirLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgSalirLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salir-login.png"))); // NOI18N
         lblImgSalirLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         pnlSeccionSalir.add(lblImgSalirLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 130, 210, 80));
 
