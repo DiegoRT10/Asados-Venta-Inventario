@@ -57,10 +57,10 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "stock")
     private int stock;
-    @OneToMany(mappedBy = "idProducto")
-    private Collection<VentaProducto> ventaProductoCollection;
-    @OneToMany(mappedBy = "idProducto")
-    private Collection<Compra> compraCollection;
+//    @OneToMany(mappedBy = "idProducto")
+//    private Collection<VentaProducto> ventaProductoCollection;
+//    @OneToMany(mappedBy = "idProducto")
+//    private Collection<Compra> compraCollection;
 
     public Producto() {
     }
@@ -135,21 +135,21 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-    public Collection<VentaProducto> getVentaProductoCollection() {
-        return ventaProductoCollection;
-    }
-
-    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
-        this.ventaProductoCollection = ventaProductoCollection;
-    }
-
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
-    }
-
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
-    }
+//    public Collection<VentaProducto> getVentaProductoCollection() {
+//        return ventaProductoCollection;
+//    }
+//
+//    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
+//        this.ventaProductoCollection = ventaProductoCollection;
+//    }
+//
+//    public Collection<Compra> getCompraCollection() {
+//        return compraCollection;
+//    }
+//
+//    public void setCompraCollection(Collection<Compra> compraCollection) {
+//        this.compraCollection = compraCollection;
+//    }
 
     @Override
     public int hashCode() {

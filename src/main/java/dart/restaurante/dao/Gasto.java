@@ -42,8 +42,8 @@ public class Gasto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "monto")
     private BigDecimal monto;
-    @OneToMany(mappedBy = "idGasto")
-    private Collection<Caja> cajaCollection;
+//    @OneToMany(mappedBy = "idGasto")
+//    private Collection<Caja> cajaCollection;
 
     public Gasto() {
     }
@@ -84,13 +84,13 @@ public class Gasto implements Serializable {
         this.monto = monto;
     }
 
-    public Collection<Caja> getCajaCollection() {
-        return cajaCollection;
-    }
-
-    public void setCajaCollection(Collection<Caja> cajaCollection) {
-        this.cajaCollection = cajaCollection;
-    }
+//    public Collection<Caja> getCajaCollection() {
+//        return cajaCollection;
+//    }
+//
+//    public void setCajaCollection(Collection<Caja> cajaCollection) {
+//        this.cajaCollection = cajaCollection;
+//    }
 
     @Override
     public int hashCode() {

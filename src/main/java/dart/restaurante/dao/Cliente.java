@@ -51,8 +51,8 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefono")
     private String telefono;
-    @OneToMany(mappedBy = "idCliente")
-    private Collection<VentaDia> ventaDiaCollection;
+//    @OneToMany(mappedBy = "idCliente")
+//    private Collection<VentaDia> ventaDiaCollection;
 
     public Cliente() {
     }
@@ -118,13 +118,13 @@ public class Cliente implements Serializable {
         this.telefono = telefono;
     }
 
-    public Collection<VentaDia> getVentaDiaCollection() {
-        return ventaDiaCollection;
-    }
-
-    public void setVentaDiaCollection(Collection<VentaDia> ventaDiaCollection) {
-        this.ventaDiaCollection = ventaDiaCollection;
-    }
+//    public Collection<VentaDia> getVentaDiaCollection() {
+//        return ventaDiaCollection;
+//    }
+//
+//    public void setVentaDiaCollection(Collection<VentaDia> ventaDiaCollection) {
+//        this.ventaDiaCollection = ventaDiaCollection;
+//    }
 
     @Override
     public int hashCode() {

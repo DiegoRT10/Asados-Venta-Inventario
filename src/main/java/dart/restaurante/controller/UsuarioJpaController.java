@@ -8,16 +8,13 @@ import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
 import dart.restaurante.dao.Usuario;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.VentaDia;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
-        if (usuario.getVentaDiaCollection() == null) {
-            usuario.setVentaDiaCollection(new ArrayList<VentaDia>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<VentaDia> attachedVentaDiaCollection = new ArrayList<VentaDia>();
-            for (VentaDia ventaDiaCollectionVentaDiaToAttach : usuario.getVentaDiaCollection()) {
-                ventaDiaCollectionVentaDiaToAttach = em.getReference(ventaDiaCollectionVentaDiaToAttach.getClass(), ventaDiaCollectionVentaDiaToAttach.getId());
-                attachedVentaDiaCollection.add(ventaDiaCollectionVentaDiaToAttach);
-            }
-            usuario.setVentaDiaCollection(attachedVentaDiaCollection);
             em.persist(usuario);
-            for (VentaDia ventaDiaCollectionVentaDia : usuario.getVentaDiaCollection()) {
-                Usuario oldIdUsuarioOfVentaDiaCollectionVentaDia = ventaDiaCollectionVentaDia.getIdUsuario();
-                ventaDiaCollectionVentaDia.setIdUsuario(usuario);
-                ventaDiaCollectionVentaDia = em.merge(ventaDiaCollectionVentaDia);
-                if (oldIdUsuarioOfVentaDiaCollectionVentaDia != null) {
-                    oldIdUsuarioOfVentaDiaCollectionVentaDia.getVentaDiaCollection().remove(ventaDiaCollectionVentaDia);
-                    oldIdUsuarioOfVentaDiaCollectionVentaDia = em.merge(oldIdUsuarioOfVentaDiaCollectionVentaDia);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findUsuario(usuario.getId()) != null) {
@@ -76,34 +55,7 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario persistentUsuario = em.find(Usuario.class, usuario.getId());
-            Collection<VentaDia> ventaDiaCollectionOld = persistentUsuario.getVentaDiaCollection();
-            Collection<VentaDia> ventaDiaCollectionNew = usuario.getVentaDiaCollection();
-            Collection<VentaDia> attachedVentaDiaCollectionNew = new ArrayList<VentaDia>();
-            for (VentaDia ventaDiaCollectionNewVentaDiaToAttach : ventaDiaCollectionNew) {
-                ventaDiaCollectionNewVentaDiaToAttach = em.getReference(ventaDiaCollectionNewVentaDiaToAttach.getClass(), ventaDiaCollectionNewVentaDiaToAttach.getId());
-                attachedVentaDiaCollectionNew.add(ventaDiaCollectionNewVentaDiaToAttach);
-            }
-            ventaDiaCollectionNew = attachedVentaDiaCollectionNew;
-            usuario.setVentaDiaCollection(ventaDiaCollectionNew);
             usuario = em.merge(usuario);
-            for (VentaDia ventaDiaCollectionOldVentaDia : ventaDiaCollectionOld) {
-                if (!ventaDiaCollectionNew.contains(ventaDiaCollectionOldVentaDia)) {
-                    ventaDiaCollectionOldVentaDia.setIdUsuario(null);
-                    ventaDiaCollectionOldVentaDia = em.merge(ventaDiaCollectionOldVentaDia);
-                }
-            }
-            for (VentaDia ventaDiaCollectionNewVentaDia : ventaDiaCollectionNew) {
-                if (!ventaDiaCollectionOld.contains(ventaDiaCollectionNewVentaDia)) {
-                    Usuario oldIdUsuarioOfVentaDiaCollectionNewVentaDia = ventaDiaCollectionNewVentaDia.getIdUsuario();
-                    ventaDiaCollectionNewVentaDia.setIdUsuario(usuario);
-                    ventaDiaCollectionNewVentaDia = em.merge(ventaDiaCollectionNewVentaDia);
-                    if (oldIdUsuarioOfVentaDiaCollectionNewVentaDia != null && !oldIdUsuarioOfVentaDiaCollectionNewVentaDia.equals(usuario)) {
-                        oldIdUsuarioOfVentaDiaCollectionNewVentaDia.getVentaDiaCollection().remove(ventaDiaCollectionNewVentaDia);
-                        oldIdUsuarioOfVentaDiaCollectionNewVentaDia = em.merge(oldIdUsuarioOfVentaDiaCollectionNewVentaDia);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,11 +84,6 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
-            }
-            Collection<VentaDia> ventaDiaCollection = usuario.getVentaDiaCollection();
-            for (VentaDia ventaDiaCollectionVentaDia : ventaDiaCollection) {
-                ventaDiaCollectionVentaDia.setIdUsuario(null);
-                ventaDiaCollectionVentaDia = em.merge(ventaDiaCollectionVentaDia);
             }
             em.remove(usuario);
             em.getTransaction().commit();

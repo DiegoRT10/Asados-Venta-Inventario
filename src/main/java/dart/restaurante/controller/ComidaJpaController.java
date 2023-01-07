@@ -8,16 +8,13 @@ import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
 import dart.restaurante.dao.Comida;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.VentaComida;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class ComidaJpaController implements Serializable {
     }
 
     public void create(Comida comida) throws PreexistingEntityException, Exception {
-        if (comida.getVentaComidaCollection() == null) {
-            comida.setVentaComidaCollection(new ArrayList<VentaComida>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<VentaComida> attachedVentaComidaCollection = new ArrayList<VentaComida>();
-            for (VentaComida ventaComidaCollectionVentaComidaToAttach : comida.getVentaComidaCollection()) {
-                ventaComidaCollectionVentaComidaToAttach = em.getReference(ventaComidaCollectionVentaComidaToAttach.getClass(), ventaComidaCollectionVentaComidaToAttach.getId());
-                attachedVentaComidaCollection.add(ventaComidaCollectionVentaComidaToAttach);
-            }
-            comida.setVentaComidaCollection(attachedVentaComidaCollection);
             em.persist(comida);
-            for (VentaComida ventaComidaCollectionVentaComida : comida.getVentaComidaCollection()) {
-                Comida oldIdComidaOfVentaComidaCollectionVentaComida = ventaComidaCollectionVentaComida.getIdComida();
-                ventaComidaCollectionVentaComida.setIdComida(comida);
-                ventaComidaCollectionVentaComida = em.merge(ventaComidaCollectionVentaComida);
-                if (oldIdComidaOfVentaComidaCollectionVentaComida != null) {
-                    oldIdComidaOfVentaComidaCollectionVentaComida.getVentaComidaCollection().remove(ventaComidaCollectionVentaComida);
-                    oldIdComidaOfVentaComidaCollectionVentaComida = em.merge(oldIdComidaOfVentaComidaCollectionVentaComida);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findComida(comida.getId()) != null) {
@@ -76,34 +55,7 @@ public class ComidaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Comida persistentComida = em.find(Comida.class, comida.getId());
-            Collection<VentaComida> ventaComidaCollectionOld = persistentComida.getVentaComidaCollection();
-            Collection<VentaComida> ventaComidaCollectionNew = comida.getVentaComidaCollection();
-            Collection<VentaComida> attachedVentaComidaCollectionNew = new ArrayList<VentaComida>();
-            for (VentaComida ventaComidaCollectionNewVentaComidaToAttach : ventaComidaCollectionNew) {
-                ventaComidaCollectionNewVentaComidaToAttach = em.getReference(ventaComidaCollectionNewVentaComidaToAttach.getClass(), ventaComidaCollectionNewVentaComidaToAttach.getId());
-                attachedVentaComidaCollectionNew.add(ventaComidaCollectionNewVentaComidaToAttach);
-            }
-            ventaComidaCollectionNew = attachedVentaComidaCollectionNew;
-            comida.setVentaComidaCollection(ventaComidaCollectionNew);
             comida = em.merge(comida);
-            for (VentaComida ventaComidaCollectionOldVentaComida : ventaComidaCollectionOld) {
-                if (!ventaComidaCollectionNew.contains(ventaComidaCollectionOldVentaComida)) {
-                    ventaComidaCollectionOldVentaComida.setIdComida(null);
-                    ventaComidaCollectionOldVentaComida = em.merge(ventaComidaCollectionOldVentaComida);
-                }
-            }
-            for (VentaComida ventaComidaCollectionNewVentaComida : ventaComidaCollectionNew) {
-                if (!ventaComidaCollectionOld.contains(ventaComidaCollectionNewVentaComida)) {
-                    Comida oldIdComidaOfVentaComidaCollectionNewVentaComida = ventaComidaCollectionNewVentaComida.getIdComida();
-                    ventaComidaCollectionNewVentaComida.setIdComida(comida);
-                    ventaComidaCollectionNewVentaComida = em.merge(ventaComidaCollectionNewVentaComida);
-                    if (oldIdComidaOfVentaComidaCollectionNewVentaComida != null && !oldIdComidaOfVentaComidaCollectionNewVentaComida.equals(comida)) {
-                        oldIdComidaOfVentaComidaCollectionNewVentaComida.getVentaComidaCollection().remove(ventaComidaCollectionNewVentaComida);
-                        oldIdComidaOfVentaComidaCollectionNewVentaComida = em.merge(oldIdComidaOfVentaComidaCollectionNewVentaComida);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,11 +84,6 @@ public class ComidaJpaController implements Serializable {
                 comida.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The comida with id " + id + " no longer exists.", enfe);
-            }
-            Collection<VentaComida> ventaComidaCollection = comida.getVentaComidaCollection();
-            for (VentaComida ventaComidaCollectionVentaComida : ventaComidaCollection) {
-                ventaComidaCollectionVentaComida.setIdComida(null);
-                ventaComidaCollectionVentaComida = em.merge(ventaComidaCollectionVentaComida);
             }
             em.remove(comida);
             em.getTransaction().commit();

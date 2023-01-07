@@ -45,10 +45,10 @@ public class VentaDia implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "total")
     private BigDecimal total;
-    @OneToMany(mappedBy = "idVentaDia")
-    private Collection<VentaProducto> ventaProductoCollection;
-    @OneToMany(mappedBy = "idVentaDia")
-    private Collection<VentaComida> ventaComidaCollection;
+//    @OneToMany(mappedBy = "idVentaDia")
+//    private Collection<VentaProducto> ventaProductoCollection;
+//    @OneToMany(mappedBy = "idVentaDia")
+//    private Collection<VentaComida> ventaComidaCollection;
     @JoinColumn(name = "idCliente", referencedColumnName = "id")
     @ManyToOne
     private Cliente idCliente;
@@ -87,21 +87,21 @@ public class VentaDia implements Serializable {
         this.total = total;
     }
 
-    public Collection<VentaProducto> getVentaProductoCollection() {
-        return ventaProductoCollection;
-    }
-
-    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
-        this.ventaProductoCollection = ventaProductoCollection;
-    }
-
-    public Collection<VentaComida> getVentaComidaCollection() {
-        return ventaComidaCollection;
-    }
-
-    public void setVentaComidaCollection(Collection<VentaComida> ventaComidaCollection) {
-        this.ventaComidaCollection = ventaComidaCollection;
-    }
+//    public Collection<VentaProducto> getVentaProductoCollection() {
+//        return ventaProductoCollection;
+//    }
+//
+//    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
+//        this.ventaProductoCollection = ventaProductoCollection;
+//    }
+//
+//    public Collection<VentaComida> getVentaComidaCollection() {
+//        return ventaComidaCollection;
+//    }
+//
+//    public void setVentaComidaCollection(Collection<VentaComida> ventaComidaCollection) {
+//        this.ventaComidaCollection = ventaComidaCollection;
+//    }
 
     public Cliente getIdCliente() {
         return idCliente;

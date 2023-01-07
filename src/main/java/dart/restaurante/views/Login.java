@@ -206,7 +206,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_txtContraseñaKeyTyped
 
     public boolean ComprobarUsuario(String user, String pasword){
-    
      Usuario usuario =  UsuarioEntityManager.findUsuario("d5c67c5e-cc64-4ead-9195-aca07e0caba5");
      if(user.equals(usuario.getUsuario())&& usuario.getContrasena().equals(Hash.sha1(pasword))){
      idUsuario = usuario.getId();

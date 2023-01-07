@@ -6,18 +6,15 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
+import dart.restaurante.dao.Cierre;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Caja;
-import dart.restaurante.dao.Cierre;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class CierreJpaController implements Serializable {
     }
 
     public void create(Cierre cierre) throws PreexistingEntityException, Exception {
-        if (cierre.getCajaCollection() == null) {
-            cierre.setCajaCollection(new ArrayList<Caja>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Caja> attachedCajaCollection = new ArrayList<Caja>();
-            for (Caja cajaCollectionCajaToAttach : cierre.getCajaCollection()) {
-                cajaCollectionCajaToAttach = em.getReference(cajaCollectionCajaToAttach.getClass(), cajaCollectionCajaToAttach.getId());
-                attachedCajaCollection.add(cajaCollectionCajaToAttach);
-            }
-            cierre.setCajaCollection(attachedCajaCollection);
             em.persist(cierre);
-            for (Caja cajaCollectionCaja : cierre.getCajaCollection()) {
-                Cierre oldIdCierreOfCajaCollectionCaja = cajaCollectionCaja.getIdCierre();
-                cajaCollectionCaja.setIdCierre(cierre);
-                cajaCollectionCaja = em.merge(cajaCollectionCaja);
-                if (oldIdCierreOfCajaCollectionCaja != null) {
-                    oldIdCierreOfCajaCollectionCaja.getCajaCollection().remove(cajaCollectionCaja);
-                    oldIdCierreOfCajaCollectionCaja = em.merge(oldIdCierreOfCajaCollectionCaja);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findCierre(cierre.getId()) != null) {
@@ -76,34 +55,7 @@ public class CierreJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Cierre persistentCierre = em.find(Cierre.class, cierre.getId());
-            Collection<Caja> cajaCollectionOld = persistentCierre.getCajaCollection();
-            Collection<Caja> cajaCollectionNew = cierre.getCajaCollection();
-            Collection<Caja> attachedCajaCollectionNew = new ArrayList<Caja>();
-            for (Caja cajaCollectionNewCajaToAttach : cajaCollectionNew) {
-                cajaCollectionNewCajaToAttach = em.getReference(cajaCollectionNewCajaToAttach.getClass(), cajaCollectionNewCajaToAttach.getId());
-                attachedCajaCollectionNew.add(cajaCollectionNewCajaToAttach);
-            }
-            cajaCollectionNew = attachedCajaCollectionNew;
-            cierre.setCajaCollection(cajaCollectionNew);
             cierre = em.merge(cierre);
-            for (Caja cajaCollectionOldCaja : cajaCollectionOld) {
-                if (!cajaCollectionNew.contains(cajaCollectionOldCaja)) {
-                    cajaCollectionOldCaja.setIdCierre(null);
-                    cajaCollectionOldCaja = em.merge(cajaCollectionOldCaja);
-                }
-            }
-            for (Caja cajaCollectionNewCaja : cajaCollectionNew) {
-                if (!cajaCollectionOld.contains(cajaCollectionNewCaja)) {
-                    Cierre oldIdCierreOfCajaCollectionNewCaja = cajaCollectionNewCaja.getIdCierre();
-                    cajaCollectionNewCaja.setIdCierre(cierre);
-                    cajaCollectionNewCaja = em.merge(cajaCollectionNewCaja);
-                    if (oldIdCierreOfCajaCollectionNewCaja != null && !oldIdCierreOfCajaCollectionNewCaja.equals(cierre)) {
-                        oldIdCierreOfCajaCollectionNewCaja.getCajaCollection().remove(cajaCollectionNewCaja);
-                        oldIdCierreOfCajaCollectionNewCaja = em.merge(oldIdCierreOfCajaCollectionNewCaja);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,11 +84,6 @@ public class CierreJpaController implements Serializable {
                 cierre.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The cierre with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Caja> cajaCollection = cierre.getCajaCollection();
-            for (Caja cajaCollectionCaja : cajaCollection) {
-                cajaCollectionCaja.setIdCierre(null);
-                cajaCollectionCaja = em.merge(cajaCollectionCaja);
             }
             em.remove(cierre);
             em.getTransaction().commit();

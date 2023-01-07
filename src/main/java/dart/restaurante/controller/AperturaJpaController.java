@@ -8,16 +8,13 @@ import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
 import dart.restaurante.dao.Apertura;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Caja;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class AperturaJpaController implements Serializable {
     }
 
     public void create(Apertura apertura) throws PreexistingEntityException, Exception {
-        if (apertura.getCajaCollection() == null) {
-            apertura.setCajaCollection(new ArrayList<Caja>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Caja> attachedCajaCollection = new ArrayList<Caja>();
-            for (Caja cajaCollectionCajaToAttach : apertura.getCajaCollection()) {
-                cajaCollectionCajaToAttach = em.getReference(cajaCollectionCajaToAttach.getClass(), cajaCollectionCajaToAttach.getId());
-                attachedCajaCollection.add(cajaCollectionCajaToAttach);
-            }
-            apertura.setCajaCollection(attachedCajaCollection);
             em.persist(apertura);
-            for (Caja cajaCollectionCaja : apertura.getCajaCollection()) {
-                Apertura oldIdAperturaOfCajaCollectionCaja = cajaCollectionCaja.getIdApertura();
-                cajaCollectionCaja.setIdApertura(apertura);
-                cajaCollectionCaja = em.merge(cajaCollectionCaja);
-                if (oldIdAperturaOfCajaCollectionCaja != null) {
-                    oldIdAperturaOfCajaCollectionCaja.getCajaCollection().remove(cajaCollectionCaja);
-                    oldIdAperturaOfCajaCollectionCaja = em.merge(oldIdAperturaOfCajaCollectionCaja);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findApertura(apertura.getId()) != null) {
@@ -76,34 +55,7 @@ public class AperturaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Apertura persistentApertura = em.find(Apertura.class, apertura.getId());
-            Collection<Caja> cajaCollectionOld = persistentApertura.getCajaCollection();
-            Collection<Caja> cajaCollectionNew = apertura.getCajaCollection();
-            Collection<Caja> attachedCajaCollectionNew = new ArrayList<Caja>();
-            for (Caja cajaCollectionNewCajaToAttach : cajaCollectionNew) {
-                cajaCollectionNewCajaToAttach = em.getReference(cajaCollectionNewCajaToAttach.getClass(), cajaCollectionNewCajaToAttach.getId());
-                attachedCajaCollectionNew.add(cajaCollectionNewCajaToAttach);
-            }
-            cajaCollectionNew = attachedCajaCollectionNew;
-            apertura.setCajaCollection(cajaCollectionNew);
             apertura = em.merge(apertura);
-            for (Caja cajaCollectionOldCaja : cajaCollectionOld) {
-                if (!cajaCollectionNew.contains(cajaCollectionOldCaja)) {
-                    cajaCollectionOldCaja.setIdApertura(null);
-                    cajaCollectionOldCaja = em.merge(cajaCollectionOldCaja);
-                }
-            }
-            for (Caja cajaCollectionNewCaja : cajaCollectionNew) {
-                if (!cajaCollectionOld.contains(cajaCollectionNewCaja)) {
-                    Apertura oldIdAperturaOfCajaCollectionNewCaja = cajaCollectionNewCaja.getIdApertura();
-                    cajaCollectionNewCaja.setIdApertura(apertura);
-                    cajaCollectionNewCaja = em.merge(cajaCollectionNewCaja);
-                    if (oldIdAperturaOfCajaCollectionNewCaja != null && !oldIdAperturaOfCajaCollectionNewCaja.equals(apertura)) {
-                        oldIdAperturaOfCajaCollectionNewCaja.getCajaCollection().remove(cajaCollectionNewCaja);
-                        oldIdAperturaOfCajaCollectionNewCaja = em.merge(oldIdAperturaOfCajaCollectionNewCaja);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,11 +84,6 @@ public class AperturaJpaController implements Serializable {
                 apertura.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The apertura with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Caja> cajaCollection = apertura.getCajaCollection();
-            for (Caja cajaCollectionCaja : cajaCollection) {
-                cajaCollectionCaja.setIdApertura(null);
-                cajaCollectionCaja = em.merge(cajaCollectionCaja);
             }
             em.remove(apertura);
             em.getTransaction().commit();

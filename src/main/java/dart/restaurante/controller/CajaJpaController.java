@@ -6,18 +6,15 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
+import dart.restaurante.dao.Caja;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Apertura;
-import dart.restaurante.dao.Caja;
-import dart.restaurante.dao.Cierre;
-import dart.restaurante.dao.Gasto;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -39,34 +36,7 @@ public class CajaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Apertura idApertura = caja.getIdApertura();
-            if (idApertura != null) {
-                idApertura = em.getReference(idApertura.getClass(), idApertura.getId());
-                caja.setIdApertura(idApertura);
-            }
-            Cierre idCierre = caja.getIdCierre();
-            if (idCierre != null) {
-                idCierre = em.getReference(idCierre.getClass(), idCierre.getId());
-                caja.setIdCierre(idCierre);
-            }
-            Gasto idGasto = caja.getIdGasto();
-            if (idGasto != null) {
-                idGasto = em.getReference(idGasto.getClass(), idGasto.getId());
-                caja.setIdGasto(idGasto);
-            }
             em.persist(caja);
-            if (idApertura != null) {
-                idApertura.getCajaCollection().add(caja);
-                idApertura = em.merge(idApertura);
-            }
-            if (idCierre != null) {
-                idCierre.getCajaCollection().add(caja);
-                idCierre = em.merge(idCierre);
-            }
-            if (idGasto != null) {
-                idGasto.getCajaCollection().add(caja);
-                idGasto = em.merge(idGasto);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findCaja(caja.getId()) != null) {
@@ -85,50 +55,7 @@ public class CajaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Caja persistentCaja = em.find(Caja.class, caja.getId());
-            Apertura idAperturaOld = persistentCaja.getIdApertura();
-            Apertura idAperturaNew = caja.getIdApertura();
-            Cierre idCierreOld = persistentCaja.getIdCierre();
-            Cierre idCierreNew = caja.getIdCierre();
-            Gasto idGastoOld = persistentCaja.getIdGasto();
-            Gasto idGastoNew = caja.getIdGasto();
-            if (idAperturaNew != null) {
-                idAperturaNew = em.getReference(idAperturaNew.getClass(), idAperturaNew.getId());
-                caja.setIdApertura(idAperturaNew);
-            }
-            if (idCierreNew != null) {
-                idCierreNew = em.getReference(idCierreNew.getClass(), idCierreNew.getId());
-                caja.setIdCierre(idCierreNew);
-            }
-            if (idGastoNew != null) {
-                idGastoNew = em.getReference(idGastoNew.getClass(), idGastoNew.getId());
-                caja.setIdGasto(idGastoNew);
-            }
             caja = em.merge(caja);
-            if (idAperturaOld != null && !idAperturaOld.equals(idAperturaNew)) {
-                idAperturaOld.getCajaCollection().remove(caja);
-                idAperturaOld = em.merge(idAperturaOld);
-            }
-            if (idAperturaNew != null && !idAperturaNew.equals(idAperturaOld)) {
-                idAperturaNew.getCajaCollection().add(caja);
-                idAperturaNew = em.merge(idAperturaNew);
-            }
-            if (idCierreOld != null && !idCierreOld.equals(idCierreNew)) {
-                idCierreOld.getCajaCollection().remove(caja);
-                idCierreOld = em.merge(idCierreOld);
-            }
-            if (idCierreNew != null && !idCierreNew.equals(idCierreOld)) {
-                idCierreNew.getCajaCollection().add(caja);
-                idCierreNew = em.merge(idCierreNew);
-            }
-            if (idGastoOld != null && !idGastoOld.equals(idGastoNew)) {
-                idGastoOld.getCajaCollection().remove(caja);
-                idGastoOld = em.merge(idGastoOld);
-            }
-            if (idGastoNew != null && !idGastoNew.equals(idGastoOld)) {
-                idGastoNew.getCajaCollection().add(caja);
-                idGastoNew = em.merge(idGastoNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -157,21 +84,6 @@ public class CajaJpaController implements Serializable {
                 caja.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The caja with id " + id + " no longer exists.", enfe);
-            }
-            Apertura idApertura = caja.getIdApertura();
-            if (idApertura != null) {
-                idApertura.getCajaCollection().remove(caja);
-                idApertura = em.merge(idApertura);
-            }
-            Cierre idCierre = caja.getIdCierre();
-            if (idCierre != null) {
-                idCierre.getCajaCollection().remove(caja);
-                idCierre = em.merge(idCierre);
-            }
-            Gasto idGasto = caja.getIdGasto();
-            if (idGasto != null) {
-                idGasto.getCajaCollection().remove(caja);
-                idGasto = em.merge(idGasto);
             }
             em.remove(caja);
             em.getTransaction().commit();

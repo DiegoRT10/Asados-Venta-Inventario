@@ -37,8 +37,8 @@ public class Cierre implements Serializable {
     private String fechaCierre;
     @Column(name = "Monto")
     private Integer monto;
-    @OneToMany(mappedBy = "idCierre")
-    private Collection<Caja> cajaCollection;
+//    @OneToMany(mappedBy = "idCierre")
+//    private Collection<Caja> cajaCollection;
 
     public Cierre() {
     }
@@ -71,13 +71,13 @@ public class Cierre implements Serializable {
         this.monto = monto;
     }
 
-    public Collection<Caja> getCajaCollection() {
-        return cajaCollection;
-    }
-
-    public void setCajaCollection(Collection<Caja> cajaCollection) {
-        this.cajaCollection = cajaCollection;
-    }
+//    public Collection<Caja> getCajaCollection() {
+//        return cajaCollection;
+//    }
+//
+//    public void setCajaCollection(Collection<Caja> cajaCollection) {
+//        this.cajaCollection = cajaCollection;
+//    }
 
     @Override
     public int hashCode() {

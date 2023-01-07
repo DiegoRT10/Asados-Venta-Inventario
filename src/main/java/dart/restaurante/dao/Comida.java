@@ -49,8 +49,8 @@ public class Comida implements Serializable {
     @Basic(optional = false)
     @Column(name = "precio")
     private BigDecimal precio;
-    @OneToMany(mappedBy = "idComida")
-    private Collection<VentaComida> ventaComidaCollection;
+//    @OneToMany(mappedBy = "idComida")
+//    private Collection<VentaComida> ventaComidaCollection;
 
     public Comida() {
     }
@@ -107,13 +107,13 @@ public class Comida implements Serializable {
         this.precio = precio;
     }
 
-    public Collection<VentaComida> getVentaComidaCollection() {
-        return ventaComidaCollection;
-    }
-
-    public void setVentaComidaCollection(Collection<VentaComida> ventaComidaCollection) {
-        this.ventaComidaCollection = ventaComidaCollection;
-    }
+//    public Collection<VentaComida> getVentaComidaCollection() {
+//        return ventaComidaCollection;
+//    }
+//
+//    public void setVentaComidaCollection(Collection<VentaComida> ventaComidaCollection) {
+//        this.ventaComidaCollection = ventaComidaCollection;
+//    }
 
     @Override
     public int hashCode() {

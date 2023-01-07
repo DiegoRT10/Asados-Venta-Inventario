@@ -6,18 +6,15 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
+import dart.restaurante.dao.Gasto;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Caja;
-import dart.restaurante.dao.Gasto;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class GastoJpaController implements Serializable {
     }
 
     public void create(Gasto gasto) throws PreexistingEntityException, Exception {
-        if (gasto.getCajaCollection() == null) {
-            gasto.setCajaCollection(new ArrayList<Caja>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Caja> attachedCajaCollection = new ArrayList<Caja>();
-            for (Caja cajaCollectionCajaToAttach : gasto.getCajaCollection()) {
-                cajaCollectionCajaToAttach = em.getReference(cajaCollectionCajaToAttach.getClass(), cajaCollectionCajaToAttach.getId());
-                attachedCajaCollection.add(cajaCollectionCajaToAttach);
-            }
-            gasto.setCajaCollection(attachedCajaCollection);
             em.persist(gasto);
-            for (Caja cajaCollectionCaja : gasto.getCajaCollection()) {
-                Gasto oldIdGastoOfCajaCollectionCaja = cajaCollectionCaja.getIdGasto();
-                cajaCollectionCaja.setIdGasto(gasto);
-                cajaCollectionCaja = em.merge(cajaCollectionCaja);
-                if (oldIdGastoOfCajaCollectionCaja != null) {
-                    oldIdGastoOfCajaCollectionCaja.getCajaCollection().remove(cajaCollectionCaja);
-                    oldIdGastoOfCajaCollectionCaja = em.merge(oldIdGastoOfCajaCollectionCaja);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findGasto(gasto.getId()) != null) {
@@ -76,34 +55,7 @@ public class GastoJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Gasto persistentGasto = em.find(Gasto.class, gasto.getId());
-            Collection<Caja> cajaCollectionOld = persistentGasto.getCajaCollection();
-            Collection<Caja> cajaCollectionNew = gasto.getCajaCollection();
-            Collection<Caja> attachedCajaCollectionNew = new ArrayList<Caja>();
-            for (Caja cajaCollectionNewCajaToAttach : cajaCollectionNew) {
-                cajaCollectionNewCajaToAttach = em.getReference(cajaCollectionNewCajaToAttach.getClass(), cajaCollectionNewCajaToAttach.getId());
-                attachedCajaCollectionNew.add(cajaCollectionNewCajaToAttach);
-            }
-            cajaCollectionNew = attachedCajaCollectionNew;
-            gasto.setCajaCollection(cajaCollectionNew);
             gasto = em.merge(gasto);
-            for (Caja cajaCollectionOldCaja : cajaCollectionOld) {
-                if (!cajaCollectionNew.contains(cajaCollectionOldCaja)) {
-                    cajaCollectionOldCaja.setIdGasto(null);
-                    cajaCollectionOldCaja = em.merge(cajaCollectionOldCaja);
-                }
-            }
-            for (Caja cajaCollectionNewCaja : cajaCollectionNew) {
-                if (!cajaCollectionOld.contains(cajaCollectionNewCaja)) {
-                    Gasto oldIdGastoOfCajaCollectionNewCaja = cajaCollectionNewCaja.getIdGasto();
-                    cajaCollectionNewCaja.setIdGasto(gasto);
-                    cajaCollectionNewCaja = em.merge(cajaCollectionNewCaja);
-                    if (oldIdGastoOfCajaCollectionNewCaja != null && !oldIdGastoOfCajaCollectionNewCaja.equals(gasto)) {
-                        oldIdGastoOfCajaCollectionNewCaja.getCajaCollection().remove(cajaCollectionNewCaja);
-                        oldIdGastoOfCajaCollectionNewCaja = em.merge(oldIdGastoOfCajaCollectionNewCaja);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,11 +84,6 @@ public class GastoJpaController implements Serializable {
                 gasto.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The gasto with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Caja> cajaCollection = gasto.getCajaCollection();
-            for (Caja cajaCollectionCaja : cajaCollection) {
-                cajaCollectionCaja.setIdGasto(null);
-                cajaCollectionCaja = em.merge(cajaCollectionCaja);
             }
             em.remove(gasto);
             em.getTransaction().commit();

@@ -67,8 +67,8 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "rol")
     private String rol;
-    @OneToMany(mappedBy = "idUsuario")
-    private Collection<VentaDia> ventaDiaCollection;
+//    @OneToMany(mappedBy = "idUsuario")
+//    private Collection<VentaDia> ventaDiaCollection;
 
     public Usuario() {
     }
@@ -170,13 +170,13 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
-    public Collection<VentaDia> getVentaDiaCollection() {
-        return ventaDiaCollection;
-    }
-
-    public void setVentaDiaCollection(Collection<VentaDia> ventaDiaCollection) {
-        this.ventaDiaCollection = ventaDiaCollection;
-    }
+//    public Collection<VentaDia> getVentaDiaCollection() {
+//        return ventaDiaCollection;
+//    }
+//
+//    public void setVentaDiaCollection(Collection<VentaDia> ventaDiaCollection) {
+//        this.ventaDiaCollection = ventaDiaCollection;
+//    }
 
     @Override
     public int hashCode() {

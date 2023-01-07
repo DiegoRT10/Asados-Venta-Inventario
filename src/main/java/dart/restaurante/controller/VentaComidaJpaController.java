@@ -6,17 +6,15 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
+import dart.restaurante.dao.VentaComida;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Comida;
-import dart.restaurante.dao.VentaComida;
-import dart.restaurante.dao.VentaDia;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -38,25 +36,7 @@ public class VentaComidaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Comida idComida = ventaComida.getIdComida();
-            if (idComida != null) {
-                idComida = em.getReference(idComida.getClass(), idComida.getId());
-                ventaComida.setIdComida(idComida);
-            }
-            VentaDia idVentaDia = ventaComida.getIdVentaDia();
-            if (idVentaDia != null) {
-                idVentaDia = em.getReference(idVentaDia.getClass(), idVentaDia.getId());
-                ventaComida.setIdVentaDia(idVentaDia);
-            }
             em.persist(ventaComida);
-            if (idComida != null) {
-                idComida.getVentaComidaCollection().add(ventaComida);
-                idComida = em.merge(idComida);
-            }
-            if (idVentaDia != null) {
-                idVentaDia.getVentaComidaCollection().add(ventaComida);
-                idVentaDia = em.merge(idVentaDia);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findVentaComida(ventaComida.getId()) != null) {
@@ -75,36 +55,7 @@ public class VentaComidaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            VentaComida persistentVentaComida = em.find(VentaComida.class, ventaComida.getId());
-            Comida idComidaOld = persistentVentaComida.getIdComida();
-            Comida idComidaNew = ventaComida.getIdComida();
-            VentaDia idVentaDiaOld = persistentVentaComida.getIdVentaDia();
-            VentaDia idVentaDiaNew = ventaComida.getIdVentaDia();
-            if (idComidaNew != null) {
-                idComidaNew = em.getReference(idComidaNew.getClass(), idComidaNew.getId());
-                ventaComida.setIdComida(idComidaNew);
-            }
-            if (idVentaDiaNew != null) {
-                idVentaDiaNew = em.getReference(idVentaDiaNew.getClass(), idVentaDiaNew.getId());
-                ventaComida.setIdVentaDia(idVentaDiaNew);
-            }
             ventaComida = em.merge(ventaComida);
-            if (idComidaOld != null && !idComidaOld.equals(idComidaNew)) {
-                idComidaOld.getVentaComidaCollection().remove(ventaComida);
-                idComidaOld = em.merge(idComidaOld);
-            }
-            if (idComidaNew != null && !idComidaNew.equals(idComidaOld)) {
-                idComidaNew.getVentaComidaCollection().add(ventaComida);
-                idComidaNew = em.merge(idComidaNew);
-            }
-            if (idVentaDiaOld != null && !idVentaDiaOld.equals(idVentaDiaNew)) {
-                idVentaDiaOld.getVentaComidaCollection().remove(ventaComida);
-                idVentaDiaOld = em.merge(idVentaDiaOld);
-            }
-            if (idVentaDiaNew != null && !idVentaDiaNew.equals(idVentaDiaOld)) {
-                idVentaDiaNew.getVentaComidaCollection().add(ventaComida);
-                idVentaDiaNew = em.merge(idVentaDiaNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -133,16 +84,6 @@ public class VentaComidaJpaController implements Serializable {
                 ventaComida.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The ventaComida with id " + id + " no longer exists.", enfe);
-            }
-            Comida idComida = ventaComida.getIdComida();
-            if (idComida != null) {
-                idComida.getVentaComidaCollection().remove(ventaComida);
-                idComida = em.merge(idComida);
-            }
-            VentaDia idVentaDia = ventaComida.getIdVentaDia();
-            if (idVentaDia != null) {
-                idVentaDia.getVentaComidaCollection().remove(ventaComida);
-                idVentaDia = em.merge(idVentaDia);
             }
             em.remove(ventaComida);
             em.getTransaction().commit();

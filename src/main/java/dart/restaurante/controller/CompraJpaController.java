@@ -8,14 +8,13 @@ import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
 import dart.restaurante.dao.Compra;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Producto;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -37,16 +36,7 @@ public class CompraJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Producto idProducto = compra.getIdProducto();
-            if (idProducto != null) {
-                idProducto = em.getReference(idProducto.getClass(), idProducto.getId());
-                compra.setIdProducto(idProducto);
-            }
             em.persist(compra);
-            if (idProducto != null) {
-                idProducto.getCompraCollection().add(compra);
-                idProducto = em.merge(idProducto);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findCompra(compra.getId()) != null) {
@@ -65,22 +55,7 @@ public class CompraJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Compra persistentCompra = em.find(Compra.class, compra.getId());
-            Producto idProductoOld = persistentCompra.getIdProducto();
-            Producto idProductoNew = compra.getIdProducto();
-            if (idProductoNew != null) {
-                idProductoNew = em.getReference(idProductoNew.getClass(), idProductoNew.getId());
-                compra.setIdProducto(idProductoNew);
-            }
             compra = em.merge(compra);
-            if (idProductoOld != null && !idProductoOld.equals(idProductoNew)) {
-                idProductoOld.getCompraCollection().remove(compra);
-                idProductoOld = em.merge(idProductoOld);
-            }
-            if (idProductoNew != null && !idProductoNew.equals(idProductoOld)) {
-                idProductoNew.getCompraCollection().add(compra);
-                idProductoNew = em.merge(idProductoNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -109,11 +84,6 @@ public class CompraJpaController implements Serializable {
                 compra.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The compra with id " + id + " no longer exists.", enfe);
-            }
-            Producto idProducto = compra.getIdProducto();
-            if (idProducto != null) {
-                idProducto.getCompraCollection().remove(compra);
-                idProducto = em.merge(idProducto);
             }
             em.remove(compra);
             em.getTransaction().commit();
