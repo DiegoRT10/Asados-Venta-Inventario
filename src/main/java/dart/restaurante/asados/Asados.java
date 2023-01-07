@@ -5,7 +5,9 @@
 
 package dart.restaurante.asados;
 
-//import dart.restaurante.views.Inicio;
+import dart.restaurante.views.Login;
+
+
 
 /**
  *
@@ -14,7 +16,7 @@ package dart.restaurante.asados;
 public class Asados {
 
     public static void main(String[] args) {
-//        Inicio i = new Inicio();
-//        i.setVisible(true);
+        Login l = new Login();
+        l.setVisible(true);
     }
 }
