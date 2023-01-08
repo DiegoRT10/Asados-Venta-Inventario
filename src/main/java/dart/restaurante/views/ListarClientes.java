@@ -105,7 +105,7 @@ public class ListarClientes extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        tblListarClientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tblListarClientes.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_NEXT_COLUMN);
         tblListarClientes.setGridColor(new java.awt.Color(153, 255, 153));
         tblListarClientes.setSelectionBackground(new java.awt.Color(255, 255, 204));
         tblListarClientes.setSelectionForeground(new java.awt.Color(0, 0, 0));
