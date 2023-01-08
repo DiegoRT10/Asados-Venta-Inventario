@@ -68,7 +68,7 @@ public class Usuario implements Serializable {
     @Column(name = "rol")
     private String rol;
 //    @OneToMany(mappedBy = "idUsuario")
-//    private Collection<VentaDia> ventaDiaCollection;
+//    private Collection<Compra> compraCollection;
 
     public Usuario() {
     }
@@ -170,12 +170,12 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
-//    public Collection<VentaDia> getVentaDiaCollection() {
-//        return ventaDiaCollection;
+//    public Collection<Compra> getCompraCollection() {
+//        return compraCollection;
 //    }
 //
-//    public void setVentaDiaCollection(Collection<VentaDia> ventaDiaCollection) {
-//        this.ventaDiaCollection = ventaDiaCollection;
+//    public void setCompraCollection(Collection<Compra> compraCollection) {
+//        this.compraCollection = compraCollection;
 //    }
 
     @Override
