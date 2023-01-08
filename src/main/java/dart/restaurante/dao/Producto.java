@@ -58,8 +58,6 @@ public class Producto implements Serializable {
     @Column(name = "stock")
     private int stock;
 //    @OneToMany(mappedBy = "idProducto")
-//    private Collection<VentaProducto> ventaProductoCollection;
-//    @OneToMany(mappedBy = "idProducto")
 //    private Collection<Compra> compraCollection;
 
     public Producto() {
@@ -135,14 +133,6 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-//    public Collection<VentaProducto> getVentaProductoCollection() {
-//        return ventaProductoCollection;
-//    }
-//
-//    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
-//        this.ventaProductoCollection = ventaProductoCollection;
-//    }
-//
 //    public Collection<Compra> getCompraCollection() {
 //        return compraCollection;
 //    }

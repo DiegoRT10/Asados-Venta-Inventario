@@ -30,6 +30,7 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Compra.findById", query = "SELECT c FROM Compra c WHERE c.id = :id"),
     @NamedQuery(name = "Compra.findByFechaCompra", query = "SELECT c FROM Compra c WHERE c.fechaCompra = :fechaCompra"),
     @NamedQuery(name = "Compra.findByCantidad", query = "SELECT c FROM Compra c WHERE c.cantidad = :cantidad"),
+    @NamedQuery(name = "Compra.findByPrecioCompra", query = "SELECT c FROM Compra c WHERE c.precioCompra = :precioCompra"),
     @NamedQuery(name = "Compra.findByTotal", query = "SELECT c FROM Compra c WHERE c.total = :total")})
 public class Compra implements Serializable {
 
@@ -44,6 +45,9 @@ public class Compra implements Serializable {
     @Column(name = "cantidad")
     private Integer cantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
+    @Column(name = "precioCompra")
+    private BigDecimal precioCompra;
     @Column(name = "total")
     private BigDecimal total;
     @JoinColumn(name = "idProducto", referencedColumnName = "id")
@@ -55,6 +59,11 @@ public class Compra implements Serializable {
 
     public Compra(String id) {
         this.id = id;
+    }
+
+    public Compra(String id, BigDecimal precioCompra) {
+        this.id = id;
+        this.precioCompra = precioCompra;
     }
 
     public String getId() {
@@ -79,6 +88,14 @@ public class Compra implements Serializable {
 
     public void setCantidad(Integer cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public BigDecimal getPrecioCompra() {
+        return precioCompra;
+    }
+
+    public void setPrecioCompra(BigDecimal precioCompra) {
+        this.precioCompra = precioCompra;
     }
 
     public BigDecimal getTotal() {
