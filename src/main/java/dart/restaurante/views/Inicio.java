@@ -86,7 +86,11 @@ public class Inicio extends javax.swing.JFrame {
         lblinfoConsulta = new javax.swing.JLabel();
         lblImgConsulta = new javax.swing.JLabel();
         lblTituloConsulta = new javax.swing.JLabel();
-        lblConsulta = new javax.swing.JLabel();
+        lblConsultaProductos = new javax.swing.JLabel();
+        lblTituloConsulta1 = new javax.swing.JLabel();
+        lblinfoConsulta1 = new javax.swing.JLabel();
+        lblImgConsulta1 = new javax.swing.JLabel();
+        lblConsultaMenus = new javax.swing.JLabel();
         pnlSeccionClientes = new javax.swing.JPanel();
         pnlTituloSeccionClientes = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -539,26 +543,50 @@ public class Inicio extends javax.swing.JFrame {
         lblinfoConsulta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblinfoConsulta.setForeground(new java.awt.Color(153, 153, 153));
         lblinfoConsulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionInventario.add(lblinfoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 350, 260, 150));
+        pnlSeccionInventario.add(lblinfoConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 260, 150));
 
         lblImgConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
         lblImgConsulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionInventario.add(lblImgConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 160, 290, 140));
+        pnlSeccionInventario.add(lblImgConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 160, 290, 140));
 
         lblTituloConsulta.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblTituloConsulta.setForeground(new java.awt.Color(153, 153, 153));
-        lblTituloConsulta.setText("Consulta");
+        lblTituloConsulta.setText("Consulta Productos");
         lblTituloConsulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionInventario.add(lblTituloConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+        pnlSeccionInventario.add(lblTituloConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 320, -1, -1));
 
-        lblConsulta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
-        lblConsulta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lblConsulta.addMouseListener(new java.awt.event.MouseAdapter() {
+        lblConsultaProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
+        lblConsultaProductos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblConsultaProductos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblConsultaMouseClicked(evt);
+                lblConsultaProductosMouseClicked(evt);
             }
         });
-        pnlSeccionInventario.add(lblConsulta, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 316, 371));
+        pnlSeccionInventario.add(lblConsultaProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, 316, 371));
+
+        lblTituloConsulta1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblTituloConsulta1.setForeground(new java.awt.Color(153, 153, 153));
+        lblTituloConsulta1.setText("Consulta Menus");
+        lblTituloConsulta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlSeccionInventario.add(lblTituloConsulta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 320, -1, -1));
+
+        lblinfoConsulta1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblinfoConsulta1.setForeground(new java.awt.Color(153, 153, 153));
+        lblinfoConsulta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlSeccionInventario.add(lblinfoConsulta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 350, 260, 150));
+
+        lblImgConsulta1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgConsulta1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlSeccionInventario.add(lblImgConsulta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 160, 290, 140));
+
+        lblConsultaMenus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
+        lblConsultaMenus.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblConsultaMenus.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblConsultaMenusMouseClicked(evt);
+            }
+        });
+        pnlSeccionInventario.add(lblConsultaMenus, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 150, 316, 371));
 
         tpnlContenedor.addTab("tab3", pnlSeccionInventario);
 
@@ -1191,11 +1219,11 @@ public class Inicio extends javax.swing.JFrame {
     this.dispose();
     }//GEN-LAST:event_lblConsultarMouseClicked
 
-    private void lblConsultaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultaMouseClicked
+    private void lblConsultaProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultaProductosMouseClicked
     ListarInventario li = new ListarInventario();
     li.setVisible(true);
     this.dispose();
-    }//GEN-LAST:event_lblConsultaMouseClicked
+    }//GEN-LAST:event_lblConsultaProductosMouseClicked
 
     private void lblConsultar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultar1MouseClicked
     ListarClientes lc = new ListarClientes();
@@ -1239,6 +1267,12 @@ public class Inicio extends javax.swing.JFrame {
     private void lblLibroVentasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLibroVentasMouseClicked
         
     }//GEN-LAST:event_lblLibroVentasMouseClicked
+
+    private void lblConsultaMenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultaMenusMouseClicked
+        ListarMenu lm = new ListarMenu();
+        lm.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblConsultaMenusMouseClicked
 
 //    public void InicioSecion(){
 //        System.out.println("id usuario "+Login.idUsuario);
@@ -1311,12 +1345,14 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator7;
     public static javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblComprar;
-    private javax.swing.JLabel lblConsulta;
+    private javax.swing.JLabel lblConsultaMenus;
+    private javax.swing.JLabel lblConsultaProductos;
     private javax.swing.JLabel lblConsultar;
     private javax.swing.JLabel lblConsultar1;
     private javax.swing.JLabel lblConsultar2;
     private javax.swing.JLabel lblImgComprar;
     private javax.swing.JLabel lblImgConsulta;
+    private javax.swing.JLabel lblImgConsulta1;
     private javax.swing.JLabel lblImgConsultar;
     private javax.swing.JLabel lblImgConsultar1;
     private javax.swing.JLabel lblImgConsultar2;
@@ -1337,6 +1373,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblSalirPrograma;
     private javax.swing.JLabel lblTituloComprar;
     private javax.swing.JLabel lblTituloConsulta;
+    private javax.swing.JLabel lblTituloConsulta1;
     private javax.swing.JLabel lblTituloConsultar;
     private javax.swing.JLabel lblTituloConsultar1;
     private javax.swing.JLabel lblTituloConsultar2;
@@ -1349,6 +1386,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblVender;
     private javax.swing.JLabel lblinfoComprar;
     private javax.swing.JLabel lblinfoConsulta;
+    private javax.swing.JLabel lblinfoConsulta1;
     private javax.swing.JLabel lblinfoKardex;
     private javax.swing.JLabel lblinfoLibroCompras;
     private javax.swing.JLabel lblinfoLibroVentas;
