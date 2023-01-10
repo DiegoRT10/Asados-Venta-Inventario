@@ -7,6 +7,7 @@ package dart.restaurante.dao;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -34,9 +35,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuario.findByContrasena", query = "SELECT u FROM Usuario u WHERE u.contrasena = :contrasena"),
     @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol")})
 public class Usuario implements Serializable {
-
-    @OneToMany(mappedBy = "idUsuario")
-    private Collection<Compra> compraCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,7 +68,9 @@ public class Usuario implements Serializable {
     @Basic(optional = false)
     @Column(name = "rol")
     private String rol;
-//    @OneToMany(mappedBy = "idUsuario")
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
+//    private Collection<Venta> ventaCollection;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idUsuario")
 //    private Collection<Compra> compraCollection;
 
     public Usuario() {
@@ -173,6 +173,14 @@ public class Usuario implements Serializable {
         this.rol = rol;
     }
 
+//    public Collection<Venta> getVentaCollection() {
+//        return ventaCollection;
+//    }
+//
+//    public void setVentaCollection(Collection<Venta> ventaCollection) {
+//        this.ventaCollection = ventaCollection;
+//    }
+//
 //    public Collection<Compra> getCompraCollection() {
 //        return compraCollection;
 //    }
@@ -204,14 +212,6 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "dart.restaurante.dao.Usuario[ id=" + id + " ]";
-    }
-
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
-    }
-
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
     }
     
 }

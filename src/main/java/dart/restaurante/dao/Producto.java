@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -33,9 +34,6 @@ import javax.persistence.Table;
     @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")})
 public class Producto implements Serializable {
 
-    @OneToMany(mappedBy = "idProducto")
-    private Collection<Compra> compraCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -60,8 +58,10 @@ public class Producto implements Serializable {
     @Basic(optional = false)
     @Column(name = "stock")
     private int stock;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProducto")
+//    private Collection<DetalleCompra> detalleCompraCollection;
 //    @OneToMany(mappedBy = "idProducto")
-//    private Collection<Compra> compraCollection;
+//    private Collection<VentaProducto> ventaProductoCollection;
 
     public Producto() {
     }
@@ -136,12 +136,20 @@ public class Producto implements Serializable {
         this.stock = stock;
     }
 
-//    public Collection<Compra> getCompraCollection() {
-//        return compraCollection;
+//    public Collection<DetalleCompra> getDetalleCompraCollection() {
+//        return detalleCompraCollection;
 //    }
 //
-//    public void setCompraCollection(Collection<Compra> compraCollection) {
-//        this.compraCollection = compraCollection;
+//    public void setDetalleCompraCollection(Collection<DetalleCompra> detalleCompraCollection) {
+//        this.detalleCompraCollection = detalleCompraCollection;
+//    }
+//
+//    public Collection<VentaProducto> getVentaProductoCollection() {
+//        return ventaProductoCollection;
+//    }
+//
+//    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
+//        this.ventaProductoCollection = ventaProductoCollection;
 //    }
 
     @Override
@@ -167,14 +175,6 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "dart.restaurante.dao.Producto[ id=" + id + " ]";
-    }
-
-    public Collection<Compra> getCompraCollection() {
-        return compraCollection;
-    }
-
-    public void setCompraCollection(Collection<Compra> compraCollection) {
-        this.compraCollection = compraCollection;
     }
     
 }

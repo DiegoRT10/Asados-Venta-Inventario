@@ -7,6 +7,7 @@ package dart.restaurante.dao;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -47,7 +48,7 @@ public class Proveedor implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefono")
     private String telefono;
-//    @OneToMany(mappedBy = "idProveedor")
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProveedor")
 //    private Collection<Compra> compraCollection;
 
     public Proveedor() {

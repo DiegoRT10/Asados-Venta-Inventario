@@ -8,15 +8,13 @@ import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
 import dart.restaurante.dao.Compra;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Producto;
-import dart.restaurante.dao.Usuario;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -38,25 +36,7 @@ public class CompraJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Producto idProducto = compra.getIdProducto();
-            if (idProducto != null) {
-                idProducto = em.getReference(idProducto.getClass(), idProducto.getId());
-                compra.setIdProducto(idProducto);
-            }
-            Usuario idUsuario = compra.getIdUsuario();
-            if (idUsuario != null) {
-                idUsuario = em.getReference(idUsuario.getClass(), idUsuario.getId());
-                compra.setIdUsuario(idUsuario);
-            }
             em.persist(compra);
-            if (idProducto != null) {
-                idProducto.getCompraCollection().add(compra);
-                idProducto = em.merge(idProducto);
-            }
-            if (idUsuario != null) {
-                idUsuario.getCompraCollection().add(compra);
-                idUsuario = em.merge(idUsuario);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findCompra(compra.getId()) != null) {
@@ -75,36 +55,7 @@ public class CompraJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Compra persistentCompra = em.find(Compra.class, compra.getId());
-            Producto idProductoOld = persistentCompra.getIdProducto();
-            Producto idProductoNew = compra.getIdProducto();
-            Usuario idUsuarioOld = persistentCompra.getIdUsuario();
-            Usuario idUsuarioNew = compra.getIdUsuario();
-            if (idProductoNew != null) {
-                idProductoNew = em.getReference(idProductoNew.getClass(), idProductoNew.getId());
-                compra.setIdProducto(idProductoNew);
-            }
-            if (idUsuarioNew != null) {
-                idUsuarioNew = em.getReference(idUsuarioNew.getClass(), idUsuarioNew.getId());
-                compra.setIdUsuario(idUsuarioNew);
-            }
             compra = em.merge(compra);
-            if (idProductoOld != null && !idProductoOld.equals(idProductoNew)) {
-                idProductoOld.getCompraCollection().remove(compra);
-                idProductoOld = em.merge(idProductoOld);
-            }
-            if (idProductoNew != null && !idProductoNew.equals(idProductoOld)) {
-                idProductoNew.getCompraCollection().add(compra);
-                idProductoNew = em.merge(idProductoNew);
-            }
-            if (idUsuarioOld != null && !idUsuarioOld.equals(idUsuarioNew)) {
-                idUsuarioOld.getCompraCollection().remove(compra);
-                idUsuarioOld = em.merge(idUsuarioOld);
-            }
-            if (idUsuarioNew != null && !idUsuarioNew.equals(idUsuarioOld)) {
-                idUsuarioNew.getCompraCollection().add(compra);
-                idUsuarioNew = em.merge(idUsuarioNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -133,16 +84,6 @@ public class CompraJpaController implements Serializable {
                 compra.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The compra with id " + id + " no longer exists.", enfe);
-            }
-            Producto idProducto = compra.getIdProducto();
-            if (idProducto != null) {
-                idProducto.getCompraCollection().remove(compra);
-                idProducto = em.merge(idProducto);
-            }
-            Usuario idUsuario = compra.getIdUsuario();
-            if (idUsuario != null) {
-                idUsuario.getCompraCollection().remove(compra);
-                idUsuario = em.merge(idUsuario);
             }
             em.remove(compra);
             em.getTransaction().commit();

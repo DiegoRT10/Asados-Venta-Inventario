@@ -6,18 +6,15 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
+import dart.restaurante.dao.Usuario;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Compra;
-import dart.restaurante.dao.Usuario;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -35,29 +32,11 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) throws PreexistingEntityException, Exception {
-        if (usuario.getCompraCollection() == null) {
-            usuario.setCompraCollection(new ArrayList<Compra>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Compra> attachedCompraCollection = new ArrayList<Compra>();
-            for (Compra compraCollectionCompraToAttach : usuario.getCompraCollection()) {
-                compraCollectionCompraToAttach = em.getReference(compraCollectionCompraToAttach.getClass(), compraCollectionCompraToAttach.getId());
-                attachedCompraCollection.add(compraCollectionCompraToAttach);
-            }
-            usuario.setCompraCollection(attachedCompraCollection);
             em.persist(usuario);
-            for (Compra compraCollectionCompra : usuario.getCompraCollection()) {
-                Usuario oldIdUsuarioOfCompraCollectionCompra = compraCollectionCompra.getIdUsuario();
-                compraCollectionCompra.setIdUsuario(usuario);
-                compraCollectionCompra = em.merge(compraCollectionCompra);
-                if (oldIdUsuarioOfCompraCollectionCompra != null) {
-                    oldIdUsuarioOfCompraCollectionCompra.getCompraCollection().remove(compraCollectionCompra);
-                    oldIdUsuarioOfCompraCollectionCompra = em.merge(oldIdUsuarioOfCompraCollectionCompra);
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findUsuario(usuario.getId()) != null) {
@@ -76,34 +55,7 @@ public class UsuarioJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Usuario persistentUsuario = em.find(Usuario.class, usuario.getId());
-            Collection<Compra> compraCollectionOld = persistentUsuario.getCompraCollection();
-            Collection<Compra> compraCollectionNew = usuario.getCompraCollection();
-            Collection<Compra> attachedCompraCollectionNew = new ArrayList<Compra>();
-            for (Compra compraCollectionNewCompraToAttach : compraCollectionNew) {
-                compraCollectionNewCompraToAttach = em.getReference(compraCollectionNewCompraToAttach.getClass(), compraCollectionNewCompraToAttach.getId());
-                attachedCompraCollectionNew.add(compraCollectionNewCompraToAttach);
-            }
-            compraCollectionNew = attachedCompraCollectionNew;
-            usuario.setCompraCollection(compraCollectionNew);
             usuario = em.merge(usuario);
-            for (Compra compraCollectionOldCompra : compraCollectionOld) {
-                if (!compraCollectionNew.contains(compraCollectionOldCompra)) {
-                    compraCollectionOldCompra.setIdUsuario(null);
-                    compraCollectionOldCompra = em.merge(compraCollectionOldCompra);
-                }
-            }
-            for (Compra compraCollectionNewCompra : compraCollectionNew) {
-                if (!compraCollectionOld.contains(compraCollectionNewCompra)) {
-                    Usuario oldIdUsuarioOfCompraCollectionNewCompra = compraCollectionNewCompra.getIdUsuario();
-                    compraCollectionNewCompra.setIdUsuario(usuario);
-                    compraCollectionNewCompra = em.merge(compraCollectionNewCompra);
-                    if (oldIdUsuarioOfCompraCollectionNewCompra != null && !oldIdUsuarioOfCompraCollectionNewCompra.equals(usuario)) {
-                        oldIdUsuarioOfCompraCollectionNewCompra.getCompraCollection().remove(compraCollectionNewCompra);
-                        oldIdUsuarioOfCompraCollectionNewCompra = em.merge(oldIdUsuarioOfCompraCollectionNewCompra);
-                    }
-                }
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -132,11 +84,6 @@ public class UsuarioJpaController implements Serializable {
                 usuario.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
-            }
-            Collection<Compra> compraCollection = usuario.getCompraCollection();
-            for (Compra compraCollectionCompra : compraCollection) {
-                compraCollectionCompra.setIdUsuario(null);
-                compraCollectionCompra = em.merge(compraCollectionCompra);
             }
             em.remove(usuario);
             em.getTransaction().commit();

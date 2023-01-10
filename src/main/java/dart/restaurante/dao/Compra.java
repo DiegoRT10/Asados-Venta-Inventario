@@ -6,8 +6,10 @@ package dart.restaurante.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,8 +32,6 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Compra.findAll", query = "SELECT c FROM Compra c"),
     @NamedQuery(name = "Compra.findById", query = "SELECT c FROM Compra c WHERE c.id = :id"),
     @NamedQuery(name = "Compra.findByFechaCompra", query = "SELECT c FROM Compra c WHERE c.fechaCompra = :fechaCompra"),
-    @NamedQuery(name = "Compra.findByCantidad", query = "SELECT c FROM Compra c WHERE c.cantidad = :cantidad"),
-    @NamedQuery(name = "Compra.findByPrecioCompra", query = "SELECT c FROM Compra c WHERE c.precioCompra = :precioCompra"),
     @NamedQuery(name = "Compra.findByTotal", query = "SELECT c FROM Compra c WHERE c.total = :total")})
 public class Compra implements Serializable {
 
@@ -39,25 +40,20 @@ public class Compra implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private String id;
+    @Basic(optional = false)
     @Column(name = "fechaCompra")
     @Temporal(TemporalType.DATE)
     private Date fechaCompra;
-    @Column(name = "cantidad")
-    private Integer cantidad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Basic(optional = false)
-    @Column(name = "precioCompra")
-    private BigDecimal precioCompra;
     @Column(name = "total")
     private BigDecimal total;
-    @JoinColumn(name = "idProducto", referencedColumnName = "id")
-    @ManyToOne
-    private Producto idProducto;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCompra")
+//    private Collection<DetalleCompra> detalleCompraCollection;
     @JoinColumn(name = "idProveedor", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Proveedor idProveedor;
     @JoinColumn(name = "idUsuario", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario idUsuario;
 
     public Compra() {
@@ -67,9 +63,9 @@ public class Compra implements Serializable {
         this.id = id;
     }
 
-    public Compra(String id, BigDecimal precioCompra) {
+    public Compra(String id, Date fechaCompra) {
         this.id = id;
-        this.precioCompra = precioCompra;
+        this.fechaCompra = fechaCompra;
     }
 
     public String getId() {
@@ -88,22 +84,6 @@ public class Compra implements Serializable {
         this.fechaCompra = fechaCompra;
     }
 
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
-    public BigDecimal getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(BigDecimal precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
     public BigDecimal getTotal() {
         return total;
     }
@@ -112,13 +92,13 @@ public class Compra implements Serializable {
         this.total = total;
     }
 
-    public Producto getIdProducto() {
-        return idProducto;
-    }
-
-    public void setIdProducto(Producto idProducto) {
-        this.idProducto = idProducto;
-    }
+//    public Collection<DetalleCompra> getDetalleCompraCollection() {
+//        return detalleCompraCollection;
+//    }
+//
+//    public void setDetalleCompraCollection(Collection<DetalleCompra> detalleCompraCollection) {
+//        this.detalleCompraCollection = detalleCompraCollection;
+//    }
 
     public Proveedor getIdProveedor() {
         return idProveedor;

@@ -26,41 +26,49 @@ import javax.persistence.TemporalType;
  * @author Diego Ramos
  */
 @Entity
-@Table(name = "VentaDia")
+@Table(name = "Venta")
 @NamedQueries({
-    @NamedQuery(name = "VentaDia.findAll", query = "SELECT v FROM VentaDia v"),
-    @NamedQuery(name = "VentaDia.findById", query = "SELECT v FROM VentaDia v WHERE v.id = :id"),
-    @NamedQuery(name = "VentaDia.findByFechaVentaDia", query = "SELECT v FROM VentaDia v WHERE v.fechaVentaDia = :fechaVentaDia"),
-    @NamedQuery(name = "VentaDia.findByTotal", query = "SELECT v FROM VentaDia v WHERE v.total = :total")})
-public class VentaDia implements Serializable {
+    @NamedQuery(name = "Venta.findAll", query = "SELECT v FROM Venta v"),
+    @NamedQuery(name = "Venta.findById", query = "SELECT v FROM Venta v WHERE v.id = :id"),
+    @NamedQuery(name = "Venta.findByFechaVenta", query = "SELECT v FROM Venta v WHERE v.fechaVenta = :fechaVenta"),
+    @NamedQuery(name = "Venta.findByTotal", query = "SELECT v FROM Venta v WHERE v.total = :total")})
+public class Venta implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @Column(name = "id")
     private String id;
-    @Column(name = "fechaVentaDia")
+    @Basic(optional = false)
+    @Column(name = "fechaVenta")
     @Temporal(TemporalType.DATE)
-    private Date fechaVentaDia;
+    private Date fechaVenta;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Basic(optional = false)
     @Column(name = "total")
     private BigDecimal total;
-//    @OneToMany(mappedBy = "idVentaDia")
-//    private Collection<VentaProducto> ventaProductoCollection;
-//    @OneToMany(mappedBy = "idVentaDia")
-//    private Collection<VentaComida> ventaComidaCollection;
     @JoinColumn(name = "idCliente", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Cliente idCliente;
     @JoinColumn(name = "idUsuario", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Usuario idUsuario;
+//    @OneToMany(mappedBy = "idVenta")
+//    private Collection<VentaComida> ventaComidaCollection;
+//    @OneToMany(mappedBy = "idVenta")
+//    private Collection<VentaProducto> ventaProductoCollection;
 
-    public VentaDia() {
+    public Venta() {
     }
 
-    public VentaDia(String id) {
+    public Venta(String id) {
         this.id = id;
+    }
+
+    public Venta(String id, Date fechaVenta, BigDecimal total) {
+        this.id = id;
+        this.fechaVenta = fechaVenta;
+        this.total = total;
     }
 
     public String getId() {
@@ -71,12 +79,12 @@ public class VentaDia implements Serializable {
         this.id = id;
     }
 
-    public Date getFechaVentaDia() {
-        return fechaVentaDia;
+    public Date getFechaVenta() {
+        return fechaVenta;
     }
 
-    public void setFechaVentaDia(Date fechaVentaDia) {
-        this.fechaVentaDia = fechaVentaDia;
+    public void setFechaVenta(Date fechaVenta) {
+        this.fechaVenta = fechaVenta;
     }
 
     public BigDecimal getTotal() {
@@ -86,22 +94,6 @@ public class VentaDia implements Serializable {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
-
-//    public Collection<VentaProducto> getVentaProductoCollection() {
-//        return ventaProductoCollection;
-//    }
-//
-//    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
-//        this.ventaProductoCollection = ventaProductoCollection;
-//    }
-//
-//    public Collection<VentaComida> getVentaComidaCollection() {
-//        return ventaComidaCollection;
-//    }
-//
-//    public void setVentaComidaCollection(Collection<VentaComida> ventaComidaCollection) {
-//        this.ventaComidaCollection = ventaComidaCollection;
-//    }
 
     public Cliente getIdCliente() {
         return idCliente;
@@ -119,6 +111,22 @@ public class VentaDia implements Serializable {
         this.idUsuario = idUsuario;
     }
 
+//    public Collection<VentaComida> getVentaComidaCollection() {
+//        return ventaComidaCollection;
+//    }
+//
+//    public void setVentaComidaCollection(Collection<VentaComida> ventaComidaCollection) {
+//        this.ventaComidaCollection = ventaComidaCollection;
+//    }
+//
+//    public Collection<VentaProducto> getVentaProductoCollection() {
+//        return ventaProductoCollection;
+//    }
+//
+//    public void setVentaProductoCollection(Collection<VentaProducto> ventaProductoCollection) {
+//        this.ventaProductoCollection = ventaProductoCollection;
+//    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -129,10 +137,10 @@ public class VentaDia implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VentaDia)) {
+        if (!(object instanceof Venta)) {
             return false;
         }
-        VentaDia other = (VentaDia) object;
+        Venta other = (Venta) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -141,7 +149,7 @@ public class VentaDia implements Serializable {
 
     @Override
     public String toString() {
-        return "dart.restaurante.dao.VentaDia[ id=" + id + " ]";
+        return "dart.restaurante.dao.Venta[ id=" + id + " ]";
     }
     
 }

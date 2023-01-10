@@ -15,6 +15,8 @@
     <class>dart.restaurante.dao.VentaDia</class>
     <class>dart.restaurante.dao.Cierre</class>
     <class>dart.restaurante.dao.Proveedor</class>
+    <class>dart.restaurante.dao.Venta</class>
+    <class>dart.restaurante.dao.DetalleCompra</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://bknym9xt4zubxbwyhloe-mysql.services.clever-cloud.com:3306/bknym9xt4zubxbwyhloe?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="ulr9dh68j9qeg3ic"/>

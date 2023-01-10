@@ -6,7 +6,7 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
-import dart.restaurante.dao.VentaDia;
+import dart.restaurante.dao.DetalleCompra;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -20,9 +20,9 @@ import javax.persistence.criteria.Root;
  *
  * @author Diego Ramos
  */
-public class VentaDiaJpaController implements Serializable {
+public class DetalleCompraJpaController implements Serializable {
 
-    public VentaDiaJpaController(EntityManagerFactory emf) {
+    public DetalleCompraJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     private EntityManagerFactory emf = null;
@@ -31,16 +31,16 @@ public class VentaDiaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(VentaDia ventaDia) throws PreexistingEntityException, Exception {
+    public void create(DetalleCompra detalleCompra) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(ventaDia);
+            em.persist(detalleCompra);
             em.getTransaction().commit();
         } catch (Exception ex) {
-            if (findVentaDia(ventaDia.getId()) != null) {
-                throw new PreexistingEntityException("VentaDia " + ventaDia + " already exists.", ex);
+            if (findDetalleCompra(detalleCompra.getId()) != null) {
+                throw new PreexistingEntityException("DetalleCompra " + detalleCompra + " already exists.", ex);
             }
             throw ex;
         } finally {
@@ -50,19 +50,19 @@ public class VentaDiaJpaController implements Serializable {
         }
     }
 
-    public void edit(VentaDia ventaDia) throws NonexistentEntityException, Exception {
+    public void edit(DetalleCompra detalleCompra) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            ventaDia = em.merge(ventaDia);
+            detalleCompra = em.merge(detalleCompra);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                String id = ventaDia.getId();
-                if (findVentaDia(id) == null) {
-                    throw new NonexistentEntityException("The ventaDia with id " + id + " no longer exists.");
+                String id = detalleCompra.getId();
+                if (findDetalleCompra(id) == null) {
+                    throw new NonexistentEntityException("The detalleCompra with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -78,14 +78,14 @@ public class VentaDiaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            VentaDia ventaDia;
+            DetalleCompra detalleCompra;
             try {
-                ventaDia = em.getReference(VentaDia.class, id);
-                ventaDia.getId();
+                detalleCompra = em.getReference(DetalleCompra.class, id);
+                detalleCompra.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The ventaDia with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The detalleCompra with id " + id + " no longer exists.", enfe);
             }
-            em.remove(ventaDia);
+            em.remove(detalleCompra);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -94,19 +94,19 @@ public class VentaDiaJpaController implements Serializable {
         }
     }
 
-    public List<VentaDia> findVentaDiaEntities() {
-        return findVentaDiaEntities(true, -1, -1);
+    public List<DetalleCompra> findDetalleCompraEntities() {
+        return findDetalleCompraEntities(true, -1, -1);
     }
 
-    public List<VentaDia> findVentaDiaEntities(int maxResults, int firstResult) {
-        return findVentaDiaEntities(false, maxResults, firstResult);
+    public List<DetalleCompra> findDetalleCompraEntities(int maxResults, int firstResult) {
+        return findDetalleCompraEntities(false, maxResults, firstResult);
     }
 
-    private List<VentaDia> findVentaDiaEntities(boolean all, int maxResults, int firstResult) {
+    private List<DetalleCompra> findDetalleCompraEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(VentaDia.class));
+            cq.select(cq.from(DetalleCompra.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -118,20 +118,20 @@ public class VentaDiaJpaController implements Serializable {
         }
     }
 
-    public VentaDia findVentaDia(String id) {
+    public DetalleCompra findDetalleCompra(String id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(VentaDia.class, id);
+            return em.find(DetalleCompra.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getVentaDiaCount() {
+    public int getDetalleCompraCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<VentaDia> rt = cq.from(VentaDia.class);
+            Root<DetalleCompra> rt = cq.from(DetalleCompra.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

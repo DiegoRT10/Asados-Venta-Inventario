@@ -42,9 +42,9 @@ public class VentaComida implements Serializable {
     @JoinColumn(name = "idComida", referencedColumnName = "id")
     @ManyToOne
     private Comida idComida;
-    @JoinColumn(name = "idVentaDia", referencedColumnName = "id")
+    @JoinColumn(name = "idVenta", referencedColumnName = "id")
     @ManyToOne
-    private VentaDia idVentaDia;
+    private Venta idVenta;
 
     public VentaComida() {
     }
@@ -85,12 +85,12 @@ public class VentaComida implements Serializable {
         this.idComida = idComida;
     }
 
-    public VentaDia getIdVentaDia() {
-        return idVentaDia;
+    public Venta getIdVenta() {
+        return idVenta;
     }
 
-    public void setIdVentaDia(VentaDia idVentaDia) {
-        this.idVentaDia = idVentaDia;
+    public void setIdVenta(Venta idVenta) {
+        this.idVenta = idVenta;
     }
 
     @Override
