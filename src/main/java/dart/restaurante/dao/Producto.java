@@ -33,6 +33,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Producto.findByStock", query = "SELECT p FROM Producto p WHERE p.stock = :stock")})
 public class Producto implements Serializable {
 
+    @OneToMany(mappedBy = "idProducto")
+    private Collection<Compra> compraCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -164,6 +167,14 @@ public class Producto implements Serializable {
     @Override
     public String toString() {
         return "dart.restaurante.dao.Producto[ id=" + id + " ]";
+    }
+
+    public Collection<Compra> getCompraCollection() {
+        return compraCollection;
+    }
+
+    public void setCompraCollection(Collection<Compra> compraCollection) {
+        this.compraCollection = compraCollection;
     }
     
 }

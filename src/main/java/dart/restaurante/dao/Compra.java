@@ -53,6 +53,9 @@ public class Compra implements Serializable {
     @JoinColumn(name = "idProducto", referencedColumnName = "id")
     @ManyToOne
     private Producto idProducto;
+    @JoinColumn(name = "idProveedor", referencedColumnName = "id")
+    @ManyToOne
+    private Proveedor idProveedor;
     @JoinColumn(name = "idUsuario", referencedColumnName = "id")
     @ManyToOne
     private Usuario idUsuario;
@@ -115,6 +118,14 @@ public class Compra implements Serializable {
 
     public void setIdProducto(Producto idProducto) {
         this.idProducto = idProducto;
+    }
+
+    public Proveedor getIdProveedor() {
+        return idProveedor;
+    }
+
+    public void setIdProveedor(Proveedor idProveedor) {
+        this.idProveedor = idProveedor;
     }
 
     public Usuario getIdUsuario() {

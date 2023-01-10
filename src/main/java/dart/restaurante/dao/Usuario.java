@@ -35,6 +35,9 @@ import javax.persistence.Table;
     @NamedQuery(name = "Usuario.findByRol", query = "SELECT u FROM Usuario u WHERE u.rol = :rol")})
 public class Usuario implements Serializable {
 
+    @OneToMany(mappedBy = "idUsuario")
+    private Collection<Compra> compraCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -201,6 +204,14 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "dart.restaurante.dao.Usuario[ id=" + id + " ]";
+    }
+
+    public Collection<Compra> getCompraCollection() {
+        return compraCollection;
+    }
+
+    public void setCompraCollection(Collection<Compra> compraCollection) {
+        this.compraCollection = compraCollection;
     }
     
 }

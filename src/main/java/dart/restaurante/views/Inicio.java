@@ -65,6 +65,8 @@ public class Inicio extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         pnlServicios = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
+        pnlProveedores = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
         tpnlContenedor = new javax.swing.JTabbedPane();
         pnlSeccionInicio = new javax.swing.JPanel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -402,7 +404,46 @@ public class Inicio extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnlLeft.add(pnlServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 270, 50));
+        pnlLeft.add(pnlServicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 450, 270, 50));
+
+        pnlProveedores.setBackground(new java.awt.Color(129, 164, 220));
+        pnlProveedores.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlProveedores.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                pnlProveedoresMouseMoved(evt);
+            }
+        });
+        pnlProveedores.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnlProveedoresMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnlProveedoresMouseExited(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0proveedores_icon_152059.png"))); // NOI18N
+        jLabel8.setText("  Proveedores");
+
+        javax.swing.GroupLayout pnlProveedoresLayout = new javax.swing.GroupLayout(pnlProveedores);
+        pnlProveedores.setLayout(pnlProveedoresLayout);
+        pnlProveedoresLayout.setHorizontalGroup(
+            pnlProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProveedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+        pnlProveedoresLayout.setVerticalGroup(
+            pnlProveedoresLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlProveedoresLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        pnlLeft.add(pnlProveedores, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 270, 50));
 
         pnlFondo.add(pnlLeft, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 270, 720));
 
@@ -1233,7 +1274,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblConsultar1MouseClicked
 
     private void lblConsultar2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultar2MouseClicked
-        
+    ListarProveedores lp = new ListarProveedores();
+    lp.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_lblConsultar2MouseClicked
 
     private void lblVenderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblVenderMouseClicked
@@ -1273,6 +1316,18 @@ public class Inicio extends javax.swing.JFrame {
         lm.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblConsultaMenusMouseClicked
+
+    private void pnlProveedoresMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedoresMouseMoved
+        pnlProveedores.setBackground(new Color(166, 173, 217));
+    }//GEN-LAST:event_pnlProveedoresMouseMoved
+
+    private void pnlProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedoresMouseClicked
+        tpnlContenedor.setSelectedIndex(4);
+    }//GEN-LAST:event_pnlProveedoresMouseClicked
+
+    private void pnlProveedoresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlProveedoresMouseExited
+        pnlProveedores.setBackground(new Color(129, 164, 220));
+    }//GEN-LAST:event_pnlProveedoresMouseExited
 
 //    public void InicioSecion(){
 //        System.out.println("id usuario "+Login.idUsuario);
@@ -1334,6 +1389,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel61;
     private javax.swing.JLabel jLabel62;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JSeparator jSeparator1;
@@ -1396,6 +1452,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JPanel pnlInicio;
     private javax.swing.JPanel pnlInventario;
     private javax.swing.JPanel pnlLeft;
+    private javax.swing.JPanel pnlProveedores;
     private javax.swing.JPanel pnlSalirLogin;
     private javax.swing.JPanel pnlSeccionClientes;
     private javax.swing.JPanel pnlSeccionFacturacion;
