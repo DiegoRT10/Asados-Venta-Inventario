@@ -20,7 +20,6 @@ import javax.swing.table.TableRowSorter;
 /**
  *
  * @author Diego Ramos
- * @author Hermas Ramirez
  */
 public class ListarProveedoresCompra extends javax.swing.JDialog {
 
@@ -41,7 +40,7 @@ public class ListarProveedoresCompra extends javax.swing.JDialog {
         //this.setExtendedState(MAXIMIZED_BOTH);
         tblListarProveedores.getTableHeader().setFont(new Font("Arial", Font.PLAIN, 20));
 
-        emf = Persistence.createEntityManagerFactory("cunori_kardex_jar_1.0-SNAPSHOTPU");
+        emf = Persistence.createEntityManagerFactory("dart.restaurante.asados_Asados_jar_1.0-SNAPSHOTPU");
         ProveedorEntityManager = new ProveedorJpaController(emf);
         
         ListarUsuarios();
@@ -248,11 +247,11 @@ public class ListarProveedoresCompra extends javax.swing.JDialog {
                                          
     int fila = tblListarProveedores.getSelectedRow();
     if(fila != -1){
-    String idProveedor = (String) tblListarProveedores.getValueAt(fila, 5);
+    String idProveedor = (String) tblListarProveedores.getValueAt(fila, 4);
     String nitProveedor = (String) tblListarProveedores.getValueAt(fila, 0);
     String nombreProveedor = (String) tblListarProveedores.getValueAt(fila, 1);
     
-    //FormCrearCompra.DatosProveedor(idProveedor, nitProveedor, nombreProveedor);
+    FormCrearCompra.DatosProveedor(idProveedor, nitProveedor, nombreProveedor);
             this.dispose();
     }else{JOptionPane.showMessageDialog(null, "No se ha selccionado nada");}
 
@@ -270,7 +269,7 @@ public class ListarProveedoresCompra extends javax.swing.JDialog {
         model.addRow(newRow);
     }   
         //Ocultar id
-        TableColumn columna2 = tblListarProveedores.getColumnModel().getColumn(5);
+        TableColumn columna2 = tblListarProveedores.getColumnModel().getColumn(4);
         columna2.setMaxWidth(0);
         columna2.setMinWidth(0);
         columna2.setPreferredWidth(0);

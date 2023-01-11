@@ -1284,7 +1284,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblVenderMouseClicked
 
     private void lblComprarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblComprarMouseClicked
-        
+    FormCrearCompra fcc = new FormCrearCompra();
+    fcc.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_lblComprarMouseClicked
 
     private void lblLibroComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLibroComprasMouseClicked
