@@ -7,6 +7,7 @@ package dart.restaurante.views;
 import dart.restaurante.controller.ProductoJpaController;
 import dart.restaurante.dao.Producto;
 import java.math.BigDecimal;
+import java.util.UUID;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
@@ -21,6 +22,8 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
     /**
      * Creates new form FormCrearProductoCompra
      */
+    
+    String IdProducto = "";
     
     EntityManagerFactory emf;
     ProductoJpaController ProductoEntityManager;
@@ -44,8 +47,6 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblCodin = new javax.swing.JLabel();
-        txtCodigo = new javax.swing.JTextField();
         lblCodin1 = new javax.swing.JLabel();
         txtCategoria = new javax.swing.JTextField();
         txtUnidad = new javax.swing.JTextField();
@@ -70,14 +71,6 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel1.setText("Datos del Producto");
-
-        lblCodin.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblCodin.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblCodin.setText("Codigo:");
-
-        txtCodigo.setBackground(new java.awt.Color(129, 164, 220));
-        txtCodigo.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtCodigo.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
 
         lblCodin1.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -171,13 +164,9 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
                                     .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblCodin8)
-                                    .addComponent(lblCodin))
+                                .addComponent(lblCodin8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtCodigo)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblCodin6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -189,11 +178,7 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(74, 74, 74)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodin8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -298,7 +283,7 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if(!vacio()){
             if(setDatosProductos()){
-//                FormCrearCompra.DatosProducto(txtCodigo.getText(), txtNombre.getText(), txtCategoria.getText(), txtUnidad.getText(), Double.valueOf(txtPrecioCompra.getText()), Double.valueOf(txtPrecioVenta.getText()),Integer.valueOf(txtStock.getText()));
+                FormCrearCompra.DatosProducto(IdProducto, txtNombre.getText(), txtCategoria.getText(), txtUnidad.getText(), Double.valueOf(txtPrecioCompra.getText()), Double.valueOf(txtPrecioVenta.getText()),Integer.valueOf(txtStock.getText()));
                 this.dispose();  
             }
 
@@ -312,38 +297,37 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private Boolean setDatosProductos(){
-//    Producto p = new Producto(); 
-//    
-//    p.setCodigo(txtCodigo.getText());
-//    p.setNombre(txtNombre.getText());
-//    p.setCategoria(txtCategoria.getText());
-//    p.setMarca(txtMarca.getText());
-//    p.setUnidad(txtUnidad.getText());
-//    p.setPesoNeto(txtPesoNeto.getText());
-//    BigDecimal precioCompra = new BigDecimal(txtPrecioCompra.getText());
-//    BigDecimal precioVenta = new BigDecimal(txtPrecioVenta.getText());
-//    p.setPrecioCompra(precioCompra);
-//    p.setPrecioVenta(precioVenta);
-//    p.setStock(Integer.parseInt(txtStock.getText()));
-//    
-//    
-//        try {
-//            ProductoEntityManager.create(p);
-//            JOptionPane.showMessageDialog(null, "El producto se creo con correctamente");
-//            return true;
-//        } catch (Exception ex) {
-//            //Logger.getLogger(FormCrearProducto.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null, "No se pudo crear el producto");
-//            return false;
-//        }
-//    
-//    
-//    
-    return false;
+Producto p = new Producto(); 
+    
+    IdProducto = UUID.randomUUID().toString();
+    p.setId(IdProducto);
+    p.setNombre(txtNombre.getText());
+    p.setCategoria(txtCategoria.getText());
+    p.setUnidad(txtUnidad.getText());
+    BigDecimal precioCompra = new BigDecimal(0);
+    BigDecimal precioVenta = new BigDecimal(0);
+    p.setPrecioCompra(precioCompra);
+    p.setPrecioVenta(precioVenta);
+    p.setStock(0);
+    
+    
+        try {
+            ProductoEntityManager.create(p);
+            JOptionPane.showMessageDialog(null, "El producto se creo con correctamente");
+            return true;
+        } catch (Exception ex) {
+            //Logger.getLogger(FormCrearProducto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "No se pudo crear el producto");
+            return false;
+        }
+    
+    
+    
+
     }
     
     private Boolean vacio(){
-    return txtCodigo.getText().isEmpty() && txtNombre.getText().isEmpty() && txtCategoria.getText().isEmpty() &&
+    return  txtNombre.getText().isEmpty() && txtCategoria.getText().isEmpty() &&
            txtUnidad.getText().isEmpty() && 
            txtPrecioCompra.getText().isEmpty() && txtPrecioVenta.getText().isEmpty() && txtStock.getText().isEmpty();
     }
@@ -400,7 +384,6 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
     private javax.swing.JButton btnRegresar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblCodin;
     private javax.swing.JLabel lblCodin1;
     private javax.swing.JLabel lblCodin11;
     private javax.swing.JLabel lblCodin3;
@@ -409,7 +392,6 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
     private javax.swing.JLabel lblCodin8;
     private javax.swing.JPanel pnlLeft;
     private javax.swing.JTextField txtCategoria;
-    private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioVenta;

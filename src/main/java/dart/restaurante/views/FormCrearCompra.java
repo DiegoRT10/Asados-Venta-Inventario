@@ -62,6 +62,10 @@ public class FormCrearCompra extends javax.swing.JFrame {
         DetalleCompraEntityManager = new DetalleCompraJpaController(emf);
         ProductoEntityManager = new ProductoJpaController(emf);
         
+        Date d = new Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
+        txtFechaRegistro.setText(sdf.format(d));
+        
         InicioSesion();
 
     }
@@ -108,6 +112,7 @@ public class FormCrearCompra extends javax.swing.JFrame {
         jPnlProductos.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 1, 24))); // NOI18N
         jPnlProductos.setPreferredSize(new java.awt.Dimension(931, 522));
 
+        txtFechaRegistro.setEditable(false);
         txtFechaRegistro.setBackground(new java.awt.Color(129, 164, 220));
         txtFechaRegistro.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txtFechaRegistro.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
@@ -533,7 +538,7 @@ public class FormCrearCompra extends javax.swing.JFrame {
        
         int fila = tblProductos.getSelectedRow();
         if (fila != -1) {
-            Double cantEliminada = Double.valueOf(tblProductos.getValueAt(fila, 9).toString());
+            Double cantEliminada = Double.valueOf(tblProductos.getValueAt(fila, 7).toString());
             TotalCompra = Double.valueOf(txtTotalPagar.getText());
             TotalCompra = TotalCompra-cantEliminada;
             txtTotalPagar.setText(TotalCompra.toString());
@@ -570,16 +575,16 @@ public class FormCrearCompra extends javax.swing.JFrame {
         txtNombreProveedor.setText(nombreProveedor);
     }
 
-    public static void DatosProducto(String codigo, String nombre, String categoria, String marca, String unidad, String pesoNeto, Double precioCompra, Double precioVenta, int stock) {
+    public static void DatosProducto(String codigo, String nombre, String categoria, String unidad,  Double precioCompra, Double precioVenta, int stock) {
         DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
 
         //model.setRowCount(0); //eliminar filas existentes
         tblProductos.setDefaultRenderer(Object.class, new Render());
-        Object newRow[] = {codigo, nombre, categoria, marca, unidad, pesoNeto, precioCompra, precioVenta, stock, precioCompra * stock};
+        Object newRow[] = {codigo, nombre, categoria,  unidad,  precioCompra, precioVenta, stock, precioCompra * stock};
         model.addRow(newRow);
 
         for (int i = 0; i < tblProductos.getRowCount(); i++) {
-            TotalCompra += Double.parseDouble(tblProductos.getValueAt(i, 9).toString());
+            TotalCompra += Double.parseDouble(tblProductos.getValueAt(i, 7).toString());
         }
         txtTotalPagar.setText(TotalCompra.toString());
         TotalCompra = 0.0;
@@ -614,8 +619,8 @@ public class FormCrearCompra extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Fecha mal ingresada");
         }
         for (int i = 0; i < tblProductos.getRowCount(); i++) {
-            cant += Integer.valueOf(tblProductos.getValueAt(i, 8).toString());
-            total += Double.valueOf(tblProductos.getValueAt(i, 9).toString());
+            cant += Integer.valueOf(tblProductos.getValueAt(i, 6).toString());
+            total += Double.valueOf(tblProductos.getValueAt(i, 7).toString());
         }
         
         BigDecimal TotalCompra = new BigDecimal(total);

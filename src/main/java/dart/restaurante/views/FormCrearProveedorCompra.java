@@ -35,7 +35,7 @@ public class FormCrearProveedorCompra extends javax.swing.JDialog {
         setIconImage(new ImageIcon(getClass().getResource("/pngwing.png")).getImage());
         //this.setExtendedState(MAXIMIZED_BOTH);
 
-        emf = Persistence.createEntityManagerFactory("cunori_kardex_jar_1.0-SNAPSHOTPU");
+        emf = Persistence.createEntityManagerFactory("dart.restaurante.asados_Asados_jar_1.0-SNAPSHOTPU");
         ProveedorEntityManager = new ProveedorJpaController(emf);
     }
 
@@ -286,7 +286,7 @@ public class FormCrearProveedorCompra extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (CrearProveedor()) {
             JOptionPane.showMessageDialog(null, "El Proveedor " + txtNombre.getText() + " se creó correctamente");
-            //FormCrearCompra.DatosProveedor(idProveedor, txtNIT.getText(), txtNombre.getText());
+            FormCrearCompra.DatosProveedor(idProveedor, txtNIT.getText(), txtNombre.getText());
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo crear el Proveedor");
