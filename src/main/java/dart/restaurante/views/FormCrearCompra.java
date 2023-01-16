@@ -688,7 +688,7 @@ public class FormCrearCompra extends javax.swing.JFrame {
                 ProductoEntityManager.edit(p);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "No se puede actualizar el producto");
-                Logger.getLogger(FormCrearCompra.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(FormCrearCompra.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             //Seteando datos detalle compra 

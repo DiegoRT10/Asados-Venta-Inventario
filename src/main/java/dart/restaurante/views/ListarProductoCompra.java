@@ -350,8 +350,7 @@ public class ListarProductoCompra extends javax.swing.JDialog {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        Inicio i = new Inicio();
-        i.setVisible(true);
+
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
