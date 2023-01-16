@@ -666,6 +666,7 @@ public class FormCrearCompra extends javax.swing.JFrame {
 
     private void DatosDetalleCompra() {
         Producto p = new Producto();
+        Producto p2 = new Producto();
 
         for (int i = 0; i < tblProductos.getRowCount(); i++) {
             String codigo = tblProductos.getValueAt(i, 0).toString();
@@ -676,7 +677,11 @@ public class FormCrearCompra extends javax.swing.JFrame {
             BigDecimal precioVenta = new BigDecimal(tblProductos.getValueAt(i, 5).toString());
             Integer stock = Integer.valueOf(tblProductos.getValueAt(i, 6).toString());
             p.setId(codigo);
-            p.setStock(stock);
+            
+            p2 = ProductoEntityManager.findProducto(codigo);
+            System.out.println("stock actual "+p2.getStock());          
+            p.setStock(stock+p2.getStock());
+            System.out.println("stock actualizado "+stock+p2.getStock());
             p.setPrecioCompra(precioCompra);
             p.setPrecioVenta(precioVenta);
             try {
