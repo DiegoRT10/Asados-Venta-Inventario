@@ -1,6 +1,7 @@
 package dart.restaurante.views;
 
 import dart.restaurante.controller.ClienteJpaController;
+import dart.restaurante.controller.exceptions.IllegalOrphanException;
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.dao.Cliente;
 import java.awt.Font;
@@ -340,6 +341,8 @@ public class ListarClientes extends javax.swing.JFrame {
                 //Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
                  JOptionPane.showMessageDialog(null, "Error, no se puede eliminar");
                 return false;
+            } catch (IllegalOrphanException ex) {
+                Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
             //Logger.getLogger(ListarClientes.class.getName()).log(Level.SEVERE, null, ex);
             

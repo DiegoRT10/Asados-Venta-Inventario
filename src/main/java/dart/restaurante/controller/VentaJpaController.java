@@ -6,15 +6,16 @@ package dart.restaurante.controller;
 
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
-import dart.restaurante.dao.Venta;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import dart.restaurante.dao.Cliente;
+import dart.restaurante.dao.Venta;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -36,7 +37,16 @@ public class VentaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Cliente idCliente = venta.getIdCliente();
+            if (idCliente != null) {
+                idCliente = em.getReference(idCliente.getClass(), idCliente.getId());
+                venta.setIdCliente(idCliente);
+            }
             em.persist(venta);
+            if (idCliente != null) {
+                idCliente.getVentaCollection().add(venta);
+                idCliente = em.merge(idCliente);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findVenta(venta.getId()) != null) {
@@ -55,7 +65,22 @@ public class VentaJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
+            Venta persistentVenta = em.find(Venta.class, venta.getId());
+            Cliente idClienteOld = persistentVenta.getIdCliente();
+            Cliente idClienteNew = venta.getIdCliente();
+            if (idClienteNew != null) {
+                idClienteNew = em.getReference(idClienteNew.getClass(), idClienteNew.getId());
+                venta.setIdCliente(idClienteNew);
+            }
             venta = em.merge(venta);
+            if (idClienteOld != null && !idClienteOld.equals(idClienteNew)) {
+                idClienteOld.getVentaCollection().remove(venta);
+                idClienteOld = em.merge(idClienteOld);
+            }
+            if (idClienteNew != null && !idClienteNew.equals(idClienteOld)) {
+                idClienteNew.getVentaCollection().add(venta);
+                idClienteNew = em.merge(idClienteNew);
+            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -84,6 +109,11 @@ public class VentaJpaController implements Serializable {
                 venta.getId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The venta with id " + id + " no longer exists.", enfe);
+            }
+            Cliente idCliente = venta.getIdCliente();
+            if (idCliente != null) {
+                idCliente.getVentaCollection().remove(venta);
+                idCliente = em.merge(idCliente);
             }
             em.remove(venta);
             em.getTransaction().commit();

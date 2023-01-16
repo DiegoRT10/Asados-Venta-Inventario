@@ -12,6 +12,7 @@ import dart.restaurante.dao.DetalleCompra;
 import dart.restaurante.dao.Producto;
 import dart.restaurante.dao.Proveedor;
 import dart.restaurante.dao.Usuario;
+import static dart.restaurante.views.Inicio.SesionUsuario;
 import static dart.restaurante.views.Inicio.lblBienvenida;
 import static dart.restaurante.views.Login.idUsuario;
 import java.awt.Font;
@@ -483,11 +484,7 @@ public class FormCrearCompra extends javax.swing.JFrame {
     private void btnCrearCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCompraActionPerformed
         if (!Vacio()) {
             Compra();//seteando datos de la compra
-            DatosDetalleCompra();//seteando datos detalleCompra
-            JOptionPane.showMessageDialog(null, "La Compra se creó correctamente");
-            FormCrearCompra fcc = new FormCrearCompra();
-            fcc.setVisible(true);
-            this.dispose();
+
         } else {
             JOptionPane.showMessageDialog(null, "Campos vacios, no se pudo crear la compra");
         }
@@ -600,7 +597,9 @@ public class FormCrearCompra extends javax.swing.JFrame {
         
         
         p.setId(idProveedor);
-        u.setId(Inicio.SesionUsuario);
+       
+        u.setId(idUsuario);
+        
         
 
         String id = UUID.randomUUID().toString();
@@ -625,12 +624,19 @@ public class FormCrearCompra extends javax.swing.JFrame {
         
         BigDecimal TotalCompra = new BigDecimal(total);
         c.setTotal(TotalCompra);
-
+        
+        System.out.println("datos compra id user"+idUsuario);
         try {
+            
             CompraEntityManager.create(c);
+            DatosDetalleCompra();//seteando datos detalleCompra
+            JOptionPane.showMessageDialog(null, "La Compra se creó correctamente");
+            FormCrearCompra fcc = new FormCrearCompra();
+            fcc.setVisible(true);
+            this.dispose();
         } catch (Exception ex) {
             Logger.getLogger(FormCrearCompra.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
+            JOptionPane.showMessageDialog(null, "No se pudo crear la compra");
         }
         
 //        lc.setId("L1");

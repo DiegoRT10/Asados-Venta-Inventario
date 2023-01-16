@@ -48,8 +48,8 @@ public class Proveedor implements Serializable {
     @Basic(optional = false)
     @Column(name = "telefono")
     private String telefono;
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProveedor")
-//    private Collection<Compra> compraCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProveedor")
+    private Collection<Compra> compraCollection;
 
     public Proveedor() {
     }
