@@ -508,8 +508,8 @@ String[] options = {"Comida", "Producto"};
     }//GEN-LAST:event_btnSeleccionarProdActionPerformed
 
     private void btnAgregarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProvActionPerformed
-        FormCrearProveedorCompra fcp = new FormCrearProveedorCompra(this, true);
-        fcp.setVisible(true);
+        FormCrearClienteVenta fcv = new FormCrearClienteVenta(this, true);
+        fcv.setVisible(true);
     }//GEN-LAST:event_btnAgregarProvActionPerformed
 
     private void btnSeleccionarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarProvActionPerformed
