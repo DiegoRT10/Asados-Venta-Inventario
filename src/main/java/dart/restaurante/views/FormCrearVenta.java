@@ -1,17 +1,23 @@
 package dart.restaurante.views;
 
 import dart.restaurante.controller.ClienteJpaController;
-import dart.restaurante.controller.CompraJpaController;
 import dart.restaurante.controller.DetalleCompraJpaController;
 import dart.restaurante.controller.ProductoJpaController;
 import dart.restaurante.controller.ProveedorJpaController;
 import dart.restaurante.controller.UsuarioJpaController;
+import dart.restaurante.controller.VentaComidaJpaController;
+import dart.restaurante.controller.VentaJpaController;
+import dart.restaurante.controller.VentaProductoJpaController;
 import dart.restaurante.dao.Cliente;
+import dart.restaurante.dao.Comida;
 import dart.restaurante.dao.Compra;
+import dart.restaurante.dao.Venta;
 import dart.restaurante.dao.DetalleCompra;
 import dart.restaurante.dao.Producto;
 import dart.restaurante.dao.Proveedor;
 import dart.restaurante.dao.Usuario;
+import dart.restaurante.dao.VentaProducto;
+import dart.restaurante.dao.VentaComida;
 import static dart.restaurante.views.Inicio.SesionUsuario;
 import static dart.restaurante.views.Inicio.lblBienvenida;
 import static dart.restaurante.views.Login.idUsuario;
@@ -38,14 +44,15 @@ import javax.swing.table.TableRowSorter;
 public class FormCrearVenta extends javax.swing.JFrame {
 
     EntityManagerFactory emf;
-    ProveedorJpaController ProveedorEntityManager;
+    ClienteJpaController ClienteEntityManager;
     UsuarioJpaController UsuarioEntityManager;
-    CompraJpaController CompraEntityManager;
-    DetalleCompraJpaController DetalleCompraEntityManager;
+    VentaJpaController VentaEntityManager;
+    VentaProductoJpaController VentaProductoEntityManager;
+    VentaComidaJpaController VentaComidaEntityManager;
     ProductoJpaController ProductoEntityManager;
 
     public static String idCliente = "";
-    String idCompra = "";
+    String idVenta = "";
     public static Double TotalCompra = 0.0;
     Boolean banderaDescuento = true;
 
@@ -58,10 +65,11 @@ public class FormCrearVenta extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
         model.setRowCount(0); //eliminar filas existentes
         emf = Persistence.createEntityManagerFactory("dart.restaurante.asados_Asados_jar_1.0-SNAPSHOTPU");
-        ProveedorEntityManager = new ProveedorJpaController(emf);
+        ClienteEntityManager = new ClienteJpaController(emf);
         UsuarioEntityManager = new UsuarioJpaController(emf);
-        CompraEntityManager = new CompraJpaController(emf);
-        DetalleCompraEntityManager = new DetalleCompraJpaController(emf);
+        VentaEntityManager = new VentaJpaController(emf);
+        VentaProductoEntityManager = new VentaProductoJpaController(emf);
+        VentaComidaEntityManager = new VentaComidaJpaController(emf);
         ProductoEntityManager = new ProductoJpaController(emf);
         
         Date d = new Date();
@@ -69,13 +77,14 @@ public class FormCrearVenta extends javax.swing.JFrame {
         txtFechaRegistro.setText(sdf.format(d));
         
         InicioSesion();
+       
         
-//        //Ocultar veridicador de comida o producto
-//        TableColumn columna2 = tblProductos.getColumnModel().getColumn(8);
-//        columna2.setMaxWidth(0);
-//        columna2.setMinWidth(0);
-//        columna2.setPreferredWidth(0);
-//        tblProductos.doLayout();
+        //Ocultar veridicador de comida o producto
+        TableColumn columna2 = tblProductos.getColumnModel().getColumn(8);
+        columna2.setMaxWidth(0);
+        columna2.setMinWidth(0);
+        columna2.setPreferredWidth(0);
+        tblProductos.doLayout();
 
     }
 
@@ -476,7 +485,7 @@ public class FormCrearVenta extends javax.swing.JFrame {
 
     private void btnCrearCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearCompraActionPerformed
         if (!Vacio()) {
-            Compra();//seteando datos de la compra
+            Venta();//seteando datos de la compra
 
         } else {
             JOptionPane.showMessageDialog(null, "Campos vacios, no se pudo crear la compra");
@@ -586,32 +595,33 @@ String[] options = {"Comida", "Producto"};
         TotalCompra = 0.0;
     }
 
-    private void Compra() {
+    private void Venta() {
         Integer cant = 0;
         Double total = 0.0;
-        Compra c = new Compra();
         Usuario u = new Usuario();
-        Proveedor p = new Proveedor();
+        Venta v = new Venta();
+        Cliente c = new Cliente();
         
         
         
-        p.setId(idCliente);
+        c.setId(idCliente);
        
         u.setId(idUsuario);
         
         
 
         String id = UUID.randomUUID().toString();
-        idCompra = id;
-        c.setId(id);
-        c.setIdUsuario(u);
-        c.setIdProveedor(p);
+        idVenta = id;
+        v.setId(id);
+        v.setIdUsuario(u);
+        v.setIdCliente(c);
+        
         //seteando Fecha
         try {
             //seteando la fecha
             Date dt = new SimpleDateFormat("dd/MM/yyyy")
                     .parse(txtFechaRegistro.getText());
-            c.setFechaCompra(dt);;
+            v.setFechaVenta(dt);
         } catch (ParseException ex) {
             //Logger.getLogger(CrearFactura.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Fecha mal ingresada");
@@ -621,14 +631,14 @@ String[] options = {"Comida", "Producto"};
             total += Double.valueOf(tblProductos.getValueAt(i, 7).toString());
         }
         
-        BigDecimal TotalCompra = new BigDecimal(total);
-        c.setTotal(TotalCompra);
+        BigDecimal TotalVenta = new BigDecimal(total);
+        v.setTotal(TotalVenta);
         
         System.out.println("datos compra id user"+idUsuario);
         try {
             
-            CompraEntityManager.create(c);
-            DatosDetalleCompra();//seteando datos detalleCompra
+            VentaEntityManager.create(v);
+            DatosDetalleVenta();//seteando datos detalleCompra
             JOptionPane.showMessageDialog(null, "La Compra se creó correctamente");
             FormCrearVenta fcc = new FormCrearVenta();
             fcc.setVisible(true);
@@ -687,12 +697,23 @@ String[] options = {"Comida", "Producto"};
 //        }
     }
 
-    private void DatosDetalleCompra() {
-        Producto p = new Producto();
-        Producto p2 = new Producto();
+    private void DatosDetalleVenta() {
+        
 
         for (int i = 0; i < tblProductos.getRowCount(); i++) {
-            String codigo = tblProductos.getValueAt(i, 0).toString();
+            if(tblProductos.getValueAt(i, 8).equals(0)){
+                VentaComida(i);
+            }else{
+                VentaProducto(i);
+            }
+        }
+
+    }
+    
+    private void VentaProducto(int i){
+        Producto p = new Producto();
+        Producto p2 = new Producto();
+        String codigo = tblProductos.getValueAt(i, 0).toString();
             p.setNombre(tblProductos.getValueAt(i, 1).toString());
             p.setCategoria(tblProductos.getValueAt(i, 2).toString());
             p.setUnidad(tblProductos.getValueAt(i, 3).toString());
@@ -703,8 +724,8 @@ String[] options = {"Comida", "Producto"};
             
             p2 = ProductoEntityManager.findProducto(codigo);
             System.out.println("stock actual "+p2.getStock());          
-            p.setStock(stock+p2.getStock());
-            System.out.println("stock actualizado "+stock+p2.getStock());
+            p.setStock(p2.getStock()-stock);
+            System.out.println("stock actualizado "+(p2.getStock()-stock));
             p.setPrecioCompra(precioCompra);
             p.setPrecioVenta(precioVenta);
             try {
@@ -715,25 +736,53 @@ String[] options = {"Comida", "Producto"};
             }
 
             //Seteando datos detalle compra 
-            DetalleCompra dc = new DetalleCompra();
-            Compra c = new Compra();
-            c.setId(idCompra);
+            VentaProducto vp = new VentaProducto();
+            Venta v = new Venta();
+            v.setId(idVenta);
             String id = UUID.randomUUID().toString();
-            dc.setId(id);
-            dc.setIdCompra(c);
-            dc.setIdProducto(p);
-            dc.setPrecioCompra(precioCompra);
-            dc.setCantidad(p.getStock());
-            BigDecimal totalIndividual = new BigDecimal(Double.parseDouble(p.getPrecioCompra().toString()) * p.getStock());
-            dc.setTotal(totalIndividual);
+            vp.setId(id);
+            vp.setIdVenta(v);
+            vp.setIdProducto(p);
+            vp.setCantidadProducto(stock);
+            System.out.println("cantidad a vender "+stock);
+            System.out.println("Precio a vender "+p.getPrecioVenta());
+            System.out.println("Total Compra "+stock*p.getPrecioVenta().doubleValue());
+            BigDecimal totalIndividual = new BigDecimal(Double.parseDouble(tblProductos.getValueAt(i, 5).toString()) * stock);
+            vp.setTotal(totalIndividual);
 
             try {
-                DetalleCompraEntityManager.create(dc);
+                VentaProductoEntityManager.create(vp);
             } catch (Exception ex) {
                 Logger.getLogger(FormCrearVenta.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+    }
+    
+    
+    private void VentaComida(int i){
+            Comida c = new Comida();
+        
+            String codigo = tblProductos.getValueAt(i, 0).toString();
+            c.setId(codigo);
+    
 
+            //Seteando datos detalle compra 
+            VentaComida vc = new VentaComida();
+            Venta v = new Venta();
+            v.setId(idVenta);
+            String id = UUID.randomUUID().toString();
+            vc.setId(id);
+            vc.setIdVenta(v);
+            vc.setIdComida(c);
+            Integer stock = Integer.valueOf(tblProductos.getValueAt(i, 6).toString());
+            vc.setCantidadComida(stock);
+            BigDecimal totalIndividual = new BigDecimal(Double.parseDouble(tblProductos.getValueAt(i, 5).toString()) * stock);
+            vc.setTotal(totalIndividual);
+
+            try {
+                VentaComidaEntityManager.create(vc);
+            } catch (Exception ex) {
+                Logger.getLogger(FormCrearVenta.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     /**

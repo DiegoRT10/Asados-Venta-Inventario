@@ -404,9 +404,10 @@ public class ListarProductoVenta extends javax.swing.JDialog {
     
     for(Producto p : producto){
         
+        if(p.getStock() != 0){
         Object newRow[] = {p.getId(),p.getNombre(),p.getCategoria(),p.getUnidad(),p.getPrecioCompra(),p.getPrecioVenta(),p.getStock()};
         model.addRow(newRow);
-        
+        }
     } 
     tblListarProductos.setAutoCreateRowSorter(true);
     sorter = new TableRowSorter<>(model);

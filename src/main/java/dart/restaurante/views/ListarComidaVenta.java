@@ -369,7 +369,7 @@ public class ListarComidaVenta extends javax.swing.JDialog {
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
     
     for(Comida c : comida){
-        
+      
         Object newRow[] = {c.getId(),c.getNombre(),c.getCategoria(),c.getUnidad(),c.getPrecio()};
         model.addRow(newRow);
         
