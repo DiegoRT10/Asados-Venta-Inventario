@@ -597,13 +597,13 @@
                   <Component id="btnSeleccionarProv" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="txtNITProveedor" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
+                      <Component id="txtNITCliente" alignment="0" min="-2" pref="385" max="-2" attributes="0"/>
                       <Component id="lblNITProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblNombreProveedor" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtNombreProveedor" alignment="0" min="-2" pref="547" max="-2" attributes="0"/>
+                      <Component id="txtNombreCliente" alignment="0" min="-2" pref="547" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -627,8 +627,8 @@
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtNITProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtNombreProveedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNITCliente" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtNombreCliente" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -650,7 +650,7 @@
             <Property name="text" type="java.lang.String" value="NIT del Cliente:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNITProveedor">
+        <Component class="javax.swing.JTextField" name="txtNITCliente">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -686,7 +686,7 @@
             <Property name="text" type="java.lang.String" value="Nombre del Cliente:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txtNombreProveedor">
+        <Component class="javax.swing.JTextField" name="txtNombreCliente">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
