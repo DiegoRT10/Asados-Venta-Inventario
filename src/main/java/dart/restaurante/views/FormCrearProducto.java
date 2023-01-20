@@ -49,17 +49,17 @@ public class FormCrearProducto extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblCodin1 = new javax.swing.JLabel();
-        txtCategoria = new javax.swing.JTextField();
-        txtUnidad = new javax.swing.JTextField();
         lblCodin3 = new javax.swing.JLabel();
         lblCodin4 = new javax.swing.JLabel();
-        txtPrecioCompra = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         lblCodin8 = new javax.swing.JLabel();
         lblCodin5 = new javax.swing.JLabel();
-        txtPrecioVenta = new javax.swing.JTextField();
-        txtStock = new javax.swing.JTextField();
         lblCodin6 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JFormattedTextField();
+        txtCategoria = new javax.swing.JFormattedTextField();
+        txtUnidad = new javax.swing.JFormattedTextField();
+        txtPrecioCompra = new javax.swing.JTextField();
+        txtPrecioVenta = new javax.swing.JTextField();
+        txtStock = new javax.swing.JFormattedTextField();
         pnlLeft = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
@@ -68,7 +68,7 @@ public class FormCrearProducto extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1230, 712));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(129, 164, 220));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(931, 522));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -78,19 +78,6 @@ public class FormCrearProducto extends javax.swing.JFrame {
         lblCodin1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin1.setText("Categoria:");
 
-        txtCategoria.setBackground(new java.awt.Color(129, 164, 220));
-        txtCategoria.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtCategoria.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCategoriaActionPerformed(evt);
-            }
-        });
-
-        txtUnidad.setBackground(new java.awt.Color(129, 164, 220));
-        txtUnidad.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtUnidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-
         lblCodin3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin3.setText("Unidad:");
@@ -98,16 +85,6 @@ public class FormCrearProducto extends javax.swing.JFrame {
         lblCodin4.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin4.setText("Precio de Compra:");
-
-        txtPrecioCompra.setEditable(false);
-        txtPrecioCompra.setBackground(new java.awt.Color(129, 164, 220));
-        txtPrecioCompra.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtPrecioCompra.setText("0.0");
-        txtPrecioCompra.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-
-        txtNombre.setBackground(new java.awt.Color(129, 164, 220));
-        txtNombre.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtNombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
 
         lblCodin8.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -117,21 +94,46 @@ public class FormCrearProducto extends javax.swing.JFrame {
         lblCodin5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin5.setText("Precio de Venta:");
 
-        txtPrecioVenta.setEditable(false);
-        txtPrecioVenta.setBackground(new java.awt.Color(129, 164, 220));
-        txtPrecioVenta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtPrecioVenta.setText("0.0");
-        txtPrecioVenta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-
-        txtStock.setEditable(false);
-        txtStock.setBackground(new java.awt.Color(129, 164, 220));
-        txtStock.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtStock.setText("0");
-        txtStock.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-
         lblCodin6.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin6.setText("Stock");
+
+        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        try {
+            txtNombre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtNombre.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
+        txtCategoria.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        try {
+            txtCategoria.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCategoria.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
+        txtUnidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        try {
+            txtUnidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtUnidad.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
+        txtPrecioCompra.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtPrecioCompra.setText("0.00");
+        txtPrecioCompra.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        txtPrecioVenta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        txtPrecioVenta.setText("0.00");
+        txtPrecioVenta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        txtStock.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        txtStock.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtStock.setText("0");
+        txtStock.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -169,45 +171,45 @@ public class FormCrearProducto extends javax.swing.JFrame {
                                 .addComponent(lblCodin6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(151, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(176, 176, 176)
+                .addGap(179, 179, 179)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodin8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodin1, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodin3, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCodin4, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblCodin5, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                     .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(193, 193, 193))
+                    .addComponent(lblCodin6, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(196, 196, 196))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 0, 1230, 680));
 
-        pnlLeft.setBackground(new java.awt.Color(129, 164, 220));
+        pnlLeft.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnGuardar.setBackground(new java.awt.Color(129, 164, 220));
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardarCheque.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar");
         btnGuardar.setBorder(null);
@@ -218,7 +220,7 @@ public class FormCrearProducto extends javax.swing.JFrame {
             }
         });
 
-        btnRegresar.setBackground(new java.awt.Color(129, 164, 220));
+        btnRegresar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0undo_111005.png"))); // NOI18N
         btnRegresar.setToolTipText("Regresar");
         btnRegresar.setBorder(null);
@@ -271,10 +273,6 @@ public class FormCrearProducto extends javax.swing.JFrame {
       li.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCategoriaActionPerformed
     
     private Boolean setDatosProductos(){
     Producto p = new Producto(); 
@@ -354,11 +352,11 @@ public class FormCrearProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodin6;
     private javax.swing.JLabel lblCodin8;
     private javax.swing.JPanel pnlLeft;
-    private javax.swing.JTextField txtCategoria;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JFormattedTextField txtCategoria;
+    private javax.swing.JFormattedTextField txtNombre;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtPrecioVenta;
-    private javax.swing.JTextField txtStock;
-    private javax.swing.JTextField txtUnidad;
+    private javax.swing.JFormattedTextField txtStock;
+    private javax.swing.JFormattedTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

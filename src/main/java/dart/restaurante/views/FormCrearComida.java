@@ -7,6 +7,7 @@ import dart.restaurante.dao.Comida;
 import dart.restaurante.dao.Producto;
 import java.awt.Font;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -51,12 +52,12 @@ public class FormCrearComida extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblCodin1 = new javax.swing.JLabel();
-        txtCategoria = new javax.swing.JTextField();
-        txtUnidad = new javax.swing.JTextField();
         lblCodin3 = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
         lblCodin8 = new javax.swing.JLabel();
         lblCodin5 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JFormattedTextField();
+        txtCategoria = new javax.swing.JFormattedTextField();
+        txtUnidad = new javax.swing.JFormattedTextField();
         txtPrecioVenta = new javax.swing.JTextField();
         pnlLeft = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
@@ -66,7 +67,7 @@ public class FormCrearComida extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1230, 712));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(129, 164, 220));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(931, 522));
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
@@ -76,26 +77,9 @@ public class FormCrearComida extends javax.swing.JFrame {
         lblCodin1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin1.setText("Categoria:");
 
-        txtCategoria.setBackground(new java.awt.Color(129, 164, 220));
-        txtCategoria.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtCategoria.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-        txtCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCategoriaActionPerformed(evt);
-            }
-        });
-
-        txtUnidad.setBackground(new java.awt.Color(129, 164, 220));
-        txtUnidad.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtUnidad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
-
         lblCodin3.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin3.setText("Unidad:");
-
-        txtNombre.setBackground(new java.awt.Color(129, 164, 220));
-        txtNombre.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtNombre.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
 
         lblCodin8.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblCodin8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -105,11 +89,33 @@ public class FormCrearComida extends javax.swing.JFrame {
         lblCodin5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCodin5.setText("Precio de Venta:");
 
-        txtPrecioVenta.setEditable(false);
-        txtPrecioVenta.setBackground(new java.awt.Color(129, 164, 220));
+        txtNombre.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        try {
+            txtNombre.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtNombre.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
+        txtCategoria.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        try {
+            txtCategoria.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtCategoria.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
+        txtUnidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        try {
+            txtUnidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtUnidad.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+
         txtPrecioVenta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtPrecioVenta.setText("0.0");
-        txtPrecioVenta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(0, 153, 255), new java.awt.Color(51, 51, 255), new java.awt.Color(51, 204, 255), new java.awt.Color(51, 153, 255)));
+        txtPrecioVenta.setText("0.00");
+        txtPrecioVenta.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,37 +145,44 @@ public class FormCrearComida extends javax.swing.JFrame {
                                 .addComponent(lblCodin5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtCategoria, txtNombre, txtPrecioVenta, txtUnidad});
+
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
-                .addGap(176, 176, 176)
+                .addGap(179, 179, 179)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodin8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCodin1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblCodin1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+                    .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCodin3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCodin5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(285, 285, 285))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(288, 288, 288))
         );
+
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {txtCategoria, txtNombre, txtPrecioVenta, txtUnidad});
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 0, 1230, 680));
 
-        pnlLeft.setBackground(new java.awt.Color(129, 164, 220));
+        pnlLeft.setBackground(new java.awt.Color(255, 255, 255));
 
-        btnGuardar.setBackground(new java.awt.Color(129, 164, 220));
+        btnGuardar.setBackground(new java.awt.Color(255, 255, 255));
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardarCheque.png"))); // NOI18N
         btnGuardar.setToolTipText("Guardar");
         btnGuardar.setBorder(null);
@@ -180,7 +193,7 @@ public class FormCrearComida extends javax.swing.JFrame {
             }
         });
 
-        btnRegresar.setBackground(new java.awt.Color(129, 164, 220));
+        btnRegresar.setBackground(new java.awt.Color(255, 255, 255));
         btnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0undo_111005.png"))); // NOI18N
         btnRegresar.setToolTipText("Regresar");
         btnRegresar.setBorder(null);
@@ -233,19 +246,15 @@ public class FormCrearComida extends javax.swing.JFrame {
       lm.setVisible(true);
       this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
-
-    private void txtCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCategoriaActionPerformed
     
     private Boolean setDatosProductos(){
     Comida c = new Comida(); 
     
     c.setId(UUID.randomUUID().toString());
-    c.setNombre(txtNombre.getText());
-    c.setCategoria(txtCategoria.getText());
-    c.setUnidad(txtUnidad.getText());
-    BigDecimal precioVenta = new BigDecimal(txtPrecioVenta.getText());
+    c.setNombre(txtNombre.getText().trim());
+    c.setCategoria(txtCategoria.getText().trim());
+    c.setUnidad(txtUnidad.getText().trim());
+    BigDecimal precioVenta = new BigDecimal(txtPrecioVenta.getText().trim());
     c.setPrecio(precioVenta);
     
     
@@ -312,9 +321,9 @@ public class FormCrearComida extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodin5;
     private javax.swing.JLabel lblCodin8;
     private javax.swing.JPanel pnlLeft;
-    private javax.swing.JTextField txtCategoria;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JFormattedTextField txtCategoria;
+    private javax.swing.JFormattedTextField txtNombre;
     private javax.swing.JTextField txtPrecioVenta;
-    private javax.swing.JTextField txtUnidad;
+    private javax.swing.JFormattedTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }
