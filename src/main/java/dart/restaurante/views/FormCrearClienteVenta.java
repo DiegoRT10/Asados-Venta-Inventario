@@ -333,7 +333,7 @@ public class FormCrearClienteVenta extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (CrearCliente()) {
             JOptionPane.showMessageDialog(null, "El Cliente " + txtNombre.getText() + " se creó correctamente");
-            FormCrearVenta.DatosCliente(idCliente, txtNIT.getText(), txtNombre.getText());
+            FormCrearVenta.DatosCliente(idCliente, txtNIT.getText().trim(), txtNombre.getText().trim());
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(null, "No se pudo crear el Cliente");
@@ -353,11 +353,11 @@ public class FormCrearClienteVenta extends javax.swing.JDialog {
             idCliente = id;
             Cliente c = new Cliente();
             c.setId(id);
-            c.setNit(txtNIT.getText());
-            c.setApellidos(txtApellido.getText());
-            c.setNombre(txtNombre.getText());
-            c.setDireccion(txtDireccion.getText());
-            c.setTelefono(txtTelefono.getText());
+            c.setNit(txtNIT.getText().trim());
+            c.setApellidos(txtApellido.getText().trim());
+            c.setNombre(txtNombre.getText().trim());
+            c.setDireccion(txtDireccion.getText().trim());
+            c.setTelefono(txtTelefono.getText().trim());
             
             try {
                 ClienteEntityManager.create(c);
