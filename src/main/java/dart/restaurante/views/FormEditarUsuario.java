@@ -386,7 +386,7 @@ public class FormEditarUsuario extends javax.swing.JFrame {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (EditarUsuario()) {
-            JOptionPane.showMessageDialog(null, "El Usuario " + txtNombre.getText() + " se editó correctamente");
+            JOptionPane.showMessageDialog(null, "El Usuario " + txtNombre.getText().trim() + " se editó correctamente");
             ListarUsuarios lu = new ListarUsuarios();
             lu.setVisible(true);
             this.dispose();
