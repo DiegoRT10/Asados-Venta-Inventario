@@ -332,7 +332,7 @@ public class FormCrearClienteVenta extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (CrearCliente()) {
-            JOptionPane.showMessageDialog(null, "El Cliente " + txtNombre.getText() + " se creó correctamente");
+            JOptionPane.showMessageDialog(null, "El Cliente " + txtNombre.getText().trim() + " se creó correctamente");
             FormCrearVenta.DatosCliente(idCliente, txtNIT.getText().trim(), txtNombre.getText().trim());
             this.dispose();
         } else {

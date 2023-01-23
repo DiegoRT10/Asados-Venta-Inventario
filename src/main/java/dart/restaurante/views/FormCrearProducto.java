@@ -278,9 +278,9 @@ public class FormCrearProducto extends javax.swing.JFrame {
     Producto p = new Producto(); 
     
     p.setId(UUID.randomUUID().toString());
-    p.setNombre(txtNombre.getText());
-    p.setCategoria(txtCategoria.getText());
-    p.setUnidad(txtUnidad.getText());
+    p.setNombre(txtNombre.getText().trim());
+    p.setCategoria(txtCategoria.getText().trim());
+    p.setUnidad(txtUnidad.getText().trim());
     BigDecimal precioCompra = new BigDecimal(0);
     BigDecimal precioVenta = new BigDecimal(0);
     p.setPrecioCompra(precioCompra);

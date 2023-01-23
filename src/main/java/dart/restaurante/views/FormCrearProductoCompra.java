@@ -266,7 +266,7 @@ public class FormCrearProductoCompra extends javax.swing.JDialog {
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if(!vacio()){
             if(setDatosProductos()){
-                FormCrearCompra.DatosProducto(IdProducto, txtNombre.getText(), txtCategoria.getText(), txtUnidad.getText(), Double.valueOf(txtPrecioCompra.getText()), Double.valueOf(txtPrecioVenta.getText()),Integer.valueOf(txtStock.getText()));
+                FormCrearCompra.DatosProducto(IdProducto, txtNombre.getText().trim(), txtCategoria.getText().trim(), txtUnidad.getText().trim(), Double.valueOf(txtPrecioCompra.getText().trim()), Double.valueOf(txtPrecioVenta.getText().trim()),Integer.valueOf(txtStock.getText().trim()));
                 this.dispose();  
             }
 
@@ -284,9 +284,9 @@ Producto p = new Producto();
     
     IdProducto = UUID.randomUUID().toString();
     p.setId(IdProducto);
-    p.setNombre(txtNombre.getText());
-    p.setCategoria(txtCategoria.getText());
-    p.setUnidad(txtUnidad.getText());
+    p.setNombre(txtNombre.getText().trim());
+    p.setCategoria(txtCategoria.getText().trim());
+    p.setUnidad(txtUnidad.getText().trim());
     BigDecimal precioCompra = new BigDecimal(0);
     BigDecimal precioVenta = new BigDecimal(0);
     p.setPrecioCompra(precioCompra);
