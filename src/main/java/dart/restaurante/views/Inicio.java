@@ -158,6 +158,7 @@ public class Inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1230, 712));
+        setResizable(false);
 
         pnlFondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -1418,7 +1419,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCierreMouseClicked
 
     private void lblResumenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResumenMouseClicked
-        // TODO add your handling code here:
+        ListarVentas lv = new ListarVentas();
+        lv.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_lblResumenMouseClicked
 
 //    public void InicioSecion(){
