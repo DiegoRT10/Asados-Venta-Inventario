@@ -1413,7 +1413,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblAperturaMouseClicked
 
     private void lblCierreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCierreMouseClicked
-        // TODO add your handling code here:
+        FormCierre fc = new FormCierre(this, true);
+       fc.setVisible(true);
     }//GEN-LAST:event_lblCierreMouseClicked
 
     private void lblResumenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResumenMouseClicked
