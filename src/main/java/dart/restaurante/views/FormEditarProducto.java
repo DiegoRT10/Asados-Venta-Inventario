@@ -56,11 +56,11 @@ public class FormEditarProducto extends javax.swing.JFrame {
         lblCodin7 = new javax.swing.JLabel();
         lblCodin11 = new javax.swing.JLabel();
         txtNombre = new javax.swing.JFormattedTextField();
-        txtCategoria = new javax.swing.JFormattedTextField();
         txtUnidad = new javax.swing.JFormattedTextField();
         txtPrecioCompra = new javax.swing.JTextField();
         txtPrecioVenta = new javax.swing.JTextField();
         txtStock = new javax.swing.JFormattedTextField();
+        cbxCategoria = new javax.swing.JComboBox<>();
         pnlLeft = new javax.swing.JPanel();
         btnGuardar = new javax.swing.JButton();
         btnRegresar = new javax.swing.JButton();
@@ -107,14 +107,6 @@ public class FormEditarProducto extends javax.swing.JFrame {
         }
         txtNombre.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
 
-        txtCategoria.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
-        try {
-            txtCategoria.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtCategoria.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-
         txtUnidad.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         try {
             txtUnidad.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("*********************************************")));
@@ -136,6 +128,11 @@ public class FormEditarProducto extends javax.swing.JFrame {
         txtStock.setText("0");
         txtStock.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
 
+        cbxCategoria.setBackground(new java.awt.Color(255, 255, 255));
+        cbxCategoria.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
+        cbxCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BEBIDAS NORMALES", "BEBIDAS ALCOHOLICAS" }));
+        cbxCategoria.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,10 +152,10 @@ public class FormEditarProducto extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtStock, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxCategoria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
@@ -171,8 +168,8 @@ public class FormEditarProducto extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(txtCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7)
+                        .addComponent(cbxCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -268,8 +265,7 @@ public class FormEditarProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegresarActionPerformed
     
     private Boolean Vacio() {
-        return txtNombre.getText().isEmpty() && txtCategoria.getText().isEmpty() 
-                 && txtUnidad.getText().isEmpty() 
+        return txtNombre.getText().isEmpty() &&  txtUnidad.getText().isEmpty() 
                 && txtPrecioCompra.getText().isEmpty()
                 && txtPrecioVenta.getText().isEmpty() && txtStock.getText().isEmpty();
     }
@@ -279,7 +275,7 @@ public class FormEditarProducto extends javax.swing.JFrame {
             Producto p = new Producto();
             p.setId(id);
             p.setNombre(txtNombre.getText().trim());
-            p.setCategoria(txtCategoria.getText().trim());
+            p.setCategoria(cbxCategoria.getSelectedItem().toString());
             p.setUnidad(txtUnidad.getText().trim());
             BigDecimal precioCompra = new BigDecimal(txtPrecioCompra.getText().trim());
             BigDecimal precioVenta = new BigDecimal(txtPrecioVenta.getText().trim());
@@ -304,7 +300,7 @@ public class FormEditarProducto extends javax.swing.JFrame {
     public static void setDatosProducto(String codigo,String nombre,String categoria,String unidad,Double precioCompra,Double precioVenta, Integer stock){
     id =codigo;
     txtNombre.setText(nombre);
-    txtCategoria.setText(categoria);
+    cbxCategoria.setSelectedItem(categoria);
     txtUnidad.setText(unidad);
     txtPrecioCompra.setText(precioCompra.toString());
     txtPrecioVenta.setText(precioVenta.toString());
@@ -348,6 +344,7 @@ public class FormEditarProducto extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton btnRegresar;
+    public static javax.swing.JComboBox<String> cbxCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCodin1;
@@ -357,7 +354,6 @@ public class FormEditarProducto extends javax.swing.JFrame {
     private javax.swing.JLabel lblCodin7;
     private javax.swing.JLabel lblCodin8;
     private javax.swing.JPanel pnlLeft;
-    public static javax.swing.JFormattedTextField txtCategoria;
     public static javax.swing.JFormattedTextField txtNombre;
     public static javax.swing.JTextField txtPrecioCompra;
     public static javax.swing.JTextField txtPrecioVenta;

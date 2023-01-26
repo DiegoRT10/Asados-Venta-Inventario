@@ -15,6 +15,7 @@ import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -59,16 +60,13 @@ public class ListarProductoVenta extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListarProductos = new javax.swing.JTable();
-        lblCodin5 = new javax.swing.JLabel();
-        txtPrecioCompra = new javax.swing.JTextField();
-        jSeparator2 = new javax.swing.JSeparator();
         txtPrecioVenta = new javax.swing.JTextField();
         jSeparator3 = new javax.swing.JSeparator();
         lblCodin6 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
         jSeparator4 = new javax.swing.JSeparator();
         lblCodin7 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
+        spnrCantidad = new javax.swing.JSpinner();
         pnlLeft = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -140,20 +138,6 @@ public class ListarProductoVenta extends javax.swing.JDialog {
             tblListarProductos.getColumnModel().getColumn(6).setPreferredWidth(150);
         }
 
-        lblCodin5.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
-        lblCodin5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lblCodin5.setText("Precio Compra");
-
-        txtPrecioCompra.setBackground(new java.awt.Color(129, 164, 220));
-        txtPrecioCompra.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtPrecioCompra.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPrecioCompra.setBorder(null);
-        txtPrecioCompra.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtPrecioCompraMouseClicked(evt);
-            }
-        });
-
         txtPrecioVenta.setBackground(new java.awt.Color(129, 164, 220));
         txtPrecioVenta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txtPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -173,27 +157,15 @@ public class ListarProductoVenta extends javax.swing.JDialog {
         lblCodin6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCodin6.setText("Precio Venta");
 
-        txtCantidad.setBackground(new java.awt.Color(129, 164, 220));
-        txtCantidad.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        txtCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtCantidad.setBorder(null);
-        txtCantidad.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtCantidadMouseClicked(evt);
-            }
-        });
-        txtCantidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCantidadActionPerformed(evt);
-            }
-        });
-
         lblCodin7.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblCodin7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCodin7.setText("Cantidad");
 
         lblNombre.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         lblNombre.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        spnrCantidad.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        spnrCantidad.setBorder(null);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -211,36 +183,28 @@ public class ListarProductoVenta extends javax.swing.JDialog {
                         .addContainerGap())
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(147, 147, 147)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(spnrCantidad)
+                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addComponent(lblCodin7)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(20, 20, 20)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(lblCodin7)
-                        .addGap(211, 211, 211)
-                        .addComponent(lblCodin5)
-                        .addGap(213, 213, 213)
-                        .addComponent(lblCodin6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 1078, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(104, 104, 104)
+                        .addComponent(lblCodin6)))
+                .addGap(184, 184, 184))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -258,22 +222,17 @@ public class ListarProductoVenta extends javax.swing.JDialog {
                 .addGap(45, 45, 45)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCodin7, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblCodin6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblCodin5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblCodin6, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtPrecioVenta)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtCantidad)
-                            .addComponent(txtPrecioCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtPrecioVenta))
+                        .addComponent(spnrCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(183, 183, 183))
         );
 
@@ -338,7 +297,7 @@ public class ListarProductoVenta extends javax.swing.JDialog {
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         int fila = tblListarProductos.getSelectedRow();
         if(fila != -1){
-            if(txtCantidad.getText().isEmpty() && txtPrecioCompra.getText().isEmpty() && txtPrecioVenta.getText().isEmpty()){
+            if(spnrCantidad.getValue().toString().isEmpty()  && txtPrecioVenta.getText().isEmpty()){
                 JOptionPane.showMessageDialog(null, "Faltan campos por llenar");
             }else{
                 setSeleccionProducto();
@@ -354,21 +313,9 @@ public class ListarProductoVenta extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
-    private void txtPrecioCompraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPrecioCompraMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrecioCompraMouseClicked
-
     private void txtPrecioVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtPrecioVentaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPrecioVentaMouseClicked
-
-    private void txtCantidadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtCantidadMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadMouseClicked
-
-    private void txtCantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantidadActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void txtPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrecioVentaActionPerformed
         // TODO add your handling code here:
@@ -376,8 +323,9 @@ public class ListarProductoVenta extends javax.swing.JDialog {
 
     private void tblListarProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblListarProductosMouseClicked
         lblNombre.setText(tblListarProductos.getValueAt(tblListarProductos.getSelectedRow(),1).toString());
-        txtPrecioCompra.setText(tblListarProductos.getValueAt(tblListarProductos.getSelectedRow(),4).toString());
+        //txtPrecioCompra.setText(tblListarProductos.getValueAt(tblListarProductos.getSelectedRow(),4).toString());
         txtPrecioVenta.setText(tblListarProductos.getValueAt(tblListarProductos.getSelectedRow(),5).toString());
+        SetCantidad();
     }//GEN-LAST:event_tblListarProductosMouseClicked
     
    public  void setSeleccionProducto(){
@@ -387,9 +335,9 @@ public class ListarProductoVenta extends javax.swing.JDialog {
     String nombre = (String) tblListarProductos.getValueAt(fila,1);
     String categoria = (String) tblListarProductos.getValueAt(fila,2);
     String unidad = (String) tblListarProductos.getValueAt(fila,3);
-    Double precioCompra = Double.valueOf(txtPrecioCompra.getText());
+    Double precioCompra = Double.valueOf(tblListarProductos.getValueAt(tblListarProductos.getSelectedRow(),4).toString());
     Double precioVenta = Double.valueOf(txtPrecioVenta.getText());
-    Integer stock = Integer.valueOf(txtCantidad.getText());
+    Integer stock = Integer.valueOf(spnrCantidad.getValue().toString());
     
     FormCrearVenta.DatosProducto(codigo,nombre,categoria,unidad,precioCompra,precioVenta,stock,1);
     }
@@ -418,6 +366,22 @@ public class ListarProductoVenta extends javax.swing.JDialog {
         sorter.setRowFilter(RowFilter.regexFilter(cadena.toUpperCase()));
 
     }
+    
+    
+     private void SetCantidad(){
+   SpinnerNumberModel nm = new SpinnerNumberModel();
+     int filaS = 1;
+     Integer stockSeleccion;
+    int fila = tblListarProductos.getSelectedRow();
+        if(fila != -1){
+    filaS = tblListarProductos.getSelectedRow();
+    stockSeleccion = Integer.valueOf(tblListarProductos.getValueAt(filaS, 6).toString());
+    nm.setMaximum(stockSeleccion);
+    nm.setMinimum(0);
+    nm.setStepSize(1);
+    spnrCantidad.setModel(nm);
+        }
+   }
    
     /**
      * @param args the command line arguments
@@ -471,18 +435,15 @@ public class ListarProductoVenta extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JLabel lblCodin5;
     private javax.swing.JLabel lblCodin6;
     private javax.swing.JLabel lblCodin7;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JPanel pnlLeft;
+    private javax.swing.JSpinner spnrCantidad;
     public static javax.swing.JTable tblListarProductos;
     private javax.swing.JTextField txtBuscar;
-    private static javax.swing.JTextField txtCantidad;
-    private static javax.swing.JTextField txtPrecioCompra;
     private static javax.swing.JTextField txtPrecioVenta;
     // End of variables declaration//GEN-END:variables
 }
