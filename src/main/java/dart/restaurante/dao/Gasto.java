@@ -7,6 +7,7 @@ package dart.restaurante.dao;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -38,7 +41,8 @@ public class Gasto implements Serializable {
     @Column(name = "descripcion")
     private String descripcion;
     @Column(name = "fechaGasto")
-    private Integer fechaGasto;
+    @Temporal(TemporalType.DATE)
+    private Date fechaGasto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "monto")
     private BigDecimal monto;
@@ -68,11 +72,11 @@ public class Gasto implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public Integer getFechaGasto() {
+    public Date getFechaGasto() {
         return fechaGasto;
     }
 
-    public void setFechaGasto(Integer fechaGasto) {
+    public void setFechaGasto(Date fechaGasto) {
         this.fechaGasto = fechaGasto;
     }
 

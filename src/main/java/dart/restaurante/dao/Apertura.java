@@ -5,7 +5,9 @@
 package dart.restaurante.dao;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -34,9 +38,11 @@ public class Apertura implements Serializable {
     @Column(name = "id")
     private String id;
     @Column(name = "fechaApertura")
-    private String fechaApertura;
+    @Temporal(TemporalType.DATE)
+    private Date fechaApertura;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Monto")
-    private Integer monto;
+    private BigDecimal monto;
 //    @OneToMany(mappedBy = "idApertura")
 //    private Collection<Caja> cajaCollection;
 
@@ -55,19 +61,19 @@ public class Apertura implements Serializable {
         this.id = id;
     }
 
-    public String getFechaApertura() {
+    public Date getFechaApertura() {
         return fechaApertura;
     }
 
-    public void setFechaApertura(String fechaApertura) {
+    public void setFechaApertura(Date fechaApertura) {
         this.fechaApertura = fechaApertura;
     }
 
-    public Integer getMonto() {
+    public BigDecimal getMonto() {
         return monto;
     }
 
-    public void setMonto(Integer monto) {
+    public void setMonto(BigDecimal monto) {
         this.monto = monto;
     }
 
