@@ -7,6 +7,7 @@ package dart.restaurante.dao;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -28,6 +31,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Caja.findAll", query = "SELECT c FROM Caja c"),
     @NamedQuery(name = "Caja.findById", query = "SELECT c FROM Caja c WHERE c.id = :id"),
+    @NamedQuery(name = "Caja.findByFecha", query = "SELECT c FROM Caja c WHERE c.fecha = :fecha"),
     @NamedQuery(name = "Caja.findByTotal", query = "SELECT c FROM Caja c WHERE c.total = :total")})
 public class Caja implements Serializable {
 
@@ -36,6 +40,10 @@ public class Caja implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private String id;
+    @Basic(optional = false)
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "total")
     private BigDecimal total;
@@ -45,11 +53,8 @@ public class Caja implements Serializable {
     @ManyToOne
     private Apertura idApertura;
     @JoinColumn(name = "idCierre", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Cierre idCierre;
-    @JoinColumn(name = "idGasto", referencedColumnName = "id")
-    @ManyToOne
-    private Gasto idGasto;
 
     public Caja() {
     }
@@ -58,12 +63,25 @@ public class Caja implements Serializable {
         this.id = id;
     }
 
+    public Caja(String id, Date fecha) {
+        this.id = id;
+        this.fecha = fecha;
+    }
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public BigDecimal getTotal() {
@@ -96,14 +114,6 @@ public class Caja implements Serializable {
 
     public void setIdCierre(Cierre idCierre) {
         this.idCierre = idCierre;
-    }
-
-    public Gasto getIdGasto() {
-        return idGasto;
-    }
-
-    public void setIdGasto(Gasto idGasto) {
-        this.idGasto = idGasto;
     }
 
     @Override

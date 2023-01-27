@@ -6,7 +6,6 @@ package dart.restaurante.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -51,8 +49,6 @@ public class Gasto implements Serializable {
     @JoinColumn(name = "idCaja", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Caja idCaja;
-//    @OneToMany(mappedBy = "idGasto")
-//    private Collection<Caja> cajaCollection;
 
     public Gasto() {
     }
@@ -100,14 +96,6 @@ public class Gasto implements Serializable {
     public void setIdCaja(Caja idCaja) {
         this.idCaja = idCaja;
     }
-
-//    public Collection<Caja> getCajaCollection() {
-//        return cajaCollection;
-//    }
-//
-//    public void setCajaCollection(Collection<Caja> cajaCollection) {
-//        this.cajaCollection = cajaCollection;
-//    }
 
     @Override
     public int hashCode() {

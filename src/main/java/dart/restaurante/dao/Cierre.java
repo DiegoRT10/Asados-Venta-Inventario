@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -43,7 +44,7 @@ public class Cierre implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "Monto")
     private BigDecimal monto;
-//    @OneToMany(mappedBy = "idCierre")
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCierre")
 //    private Collection<Caja> cajaCollection;
 
     public Cierre() {

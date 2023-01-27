@@ -5,7 +5,11 @@
 package dart.restaurante.views;
 
 import dart.restaurante.controller.AperturaJpaController;
+import dart.restaurante.controller.CajaJpaController;
+import dart.restaurante.controller.CierreJpaController;
 import dart.restaurante.dao.Apertura;
+import dart.restaurante.dao.Caja;
+import dart.restaurante.dao.Cierre;
 
 //import dart.restaurante.views.ListarInventario.tblListarProductos;
 import java.awt.Font;
@@ -37,7 +41,14 @@ public class FormApertura extends javax.swing.JDialog {
      */
     EntityManagerFactory emf;
    AperturaJpaController AperturaEntityManager;
+   CajaJpaController CajaEntityManager;
+   CierreJpaController CierreEntityManager;
     public static TableRowSorter<DefaultTableModel> sorter;
+    public static String idApertura ="";
+    public static String idCierre ="";
+    public static String idCaja ="";
+    
+    
     public FormApertura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -48,6 +59,8 @@ public class FormApertura extends javax.swing.JDialog {
 
         emf = Persistence.createEntityManagerFactory("dart.restaurante.asados_Asados_jar_1.0-SNAPSHOTPU");
         AperturaEntityManager = new AperturaJpaController(emf);
+        CajaEntityManager = new CajaJpaController(emf);
+        CierreEntityManager = new CierreJpaController(emf);
         
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
@@ -359,8 +372,20 @@ public class FormApertura extends javax.swing.JDialog {
     
     private void SaveApertura(){
     
+    Caja c = new Caja();
+    Cierre cr = new Cierre();      
     Apertura ap = new Apertura();
-    ap.setId(UUID.randomUUID().toString());
+    
+    idCaja = UUID.randomUUID().toString();
+    idApertura = UUID.randomUUID().toString();
+    ap.setId(idApertura); 
+    idCierre = UUID.randomUUID().toString();
+    cr.setId(idCierre);
+    
+    
+    
+    
+    ap.setId(idApertura);
     try {
             //seteando la fecha
             Date dt = new SimpleDateFormat("dd/MM/yyyy")
@@ -373,15 +398,68 @@ public class FormApertura extends javax.swing.JDialog {
     BigDecimal monto = new BigDecimal(txtMonto.getText());
     ap.setMonto(monto);
     
+   
+    
+    
         try {
             AperturaEntityManager.create(ap);
-            JOptionPane.showMessageDialog(null, "Se aperturo, suerte en la venta");
-            ListarProductos();
+            JOptionPane.showMessageDialog(null, "Se aperturo, suerte en la venta");   
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "No se creo la apertura");
             //Logger.getLogger(FormApertura.class.getName()).log(Level.SEVERE, null, ex);
         }
     
+        
+       
+        
+        //Creando cierre 
+        try {
+            //seteando la fecha
+            Date dt = new SimpleDateFormat("dd/MM/yyyy")
+                    .parse(txtFechaApertura.getText());
+            cr.setFechaCierre(dt);
+        } catch (ParseException ex) {
+            //Logger.getLogger(CrearFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Fecha mal ingresada cierre");
+        }
+        
+        BigDecimal totalCierre = new BigDecimal("0");
+        cr.setMonto(totalCierre);
+                
+        try {
+            CierreEntityManager.create(cr);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se creo el cierre");
+            //Logger.getLogger(FormApertura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+        
+    //creacion de caja
+    c.setId(idCaja);
+    c.setIdApertura(ap);
+    c.setIdCierre(cr);
+    
+     try {
+            //seteando la fecha
+            Date dt = new SimpleDateFormat("dd/MM/yyyy")
+                    .parse(txtFechaApertura.getText());
+            c.setFecha(dt);
+        } catch (ParseException ex) {
+            //Logger.getLogger(CrearFactura.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Fecha mal ingresada caja");
+        }
+    BigDecimal total = new BigDecimal(ap.getMonto().toString());
+    c.setTotal(total);
+        try {
+            CajaEntityManager.create(c);
+            ListarProductos();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se creo la caja");
+            //Logger.getLogger(FormApertura.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
     }
 

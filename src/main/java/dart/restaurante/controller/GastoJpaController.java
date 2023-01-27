@@ -4,20 +4,18 @@
  */
 package dart.restaurante.controller;
 
-import dart.restaurante.controller.exceptions.IllegalOrphanException;
 import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
-import java.io.Serializable;
-import javax.persistence.Query;
-import javax.persistence.EntityNotFoundException;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
-import dart.restaurante.dao.Caja;
 import dart.restaurante.dao.Gasto;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
+import javax.persistence.EntityNotFoundException;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -34,35 +32,12 @@ public class GastoJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Gasto gasto) throws IllegalOrphanException, PreexistingEntityException, Exception {
-        List<String> illegalOrphanMessages = null;
-        Caja idCajaOrphanCheck = gasto.getIdCaja();
-        if (idCajaOrphanCheck != null) {
-            Gasto oldIdGastoOfIdCaja = idCajaOrphanCheck.getIdGasto();
-            if (oldIdGastoOfIdCaja != null) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("The Caja " + idCajaOrphanCheck + " already has an item of type Gasto whose idCaja column cannot be null. Please make another selection for the idCaja field.");
-            }
-        }
-        if (illegalOrphanMessages != null) {
-            throw new IllegalOrphanException(illegalOrphanMessages);
-        }
+    public void create(Gasto gasto) throws PreexistingEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Caja idCaja = gasto.getIdCaja();
-            if (idCaja != null) {
-                idCaja = em.getReference(idCaja.getClass(), idCaja.getId());
-                gasto.setIdCaja(idCaja);
-            }
             em.persist(gasto);
-            if (idCaja != null) {
-                idCaja.setIdGasto(gasto);
-                idCaja = em.merge(idCaja);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             if (findGasto(gasto.getId()) != null) {
@@ -76,40 +51,12 @@ public class GastoJpaController implements Serializable {
         }
     }
 
-    public void edit(Gasto gasto) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Gasto gasto) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Gasto persistentGasto = em.find(Gasto.class, gasto.getId());
-            Caja idCajaOld = persistentGasto.getIdCaja();
-            Caja idCajaNew = gasto.getIdCaja();
-            List<String> illegalOrphanMessages = null;
-            if (idCajaNew != null && !idCajaNew.equals(idCajaOld)) {
-                Gasto oldIdGastoOfIdCaja = idCajaNew.getIdGasto();
-                if (oldIdGastoOfIdCaja != null) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("The Caja " + idCajaNew + " already has an item of type Gasto whose idCaja column cannot be null. Please make another selection for the idCaja field.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
-            if (idCajaNew != null) {
-                idCajaNew = em.getReference(idCajaNew.getClass(), idCajaNew.getId());
-                gasto.setIdCaja(idCajaNew);
-            }
             gasto = em.merge(gasto);
-            if (idCajaOld != null && !idCajaOld.equals(idCajaNew)) {
-                idCajaOld.setIdGasto(null);
-                idCajaOld = em.merge(idCajaOld);
-            }
-            if (idCajaNew != null && !idCajaNew.equals(idCajaOld)) {
-                idCajaNew.setIdGasto(gasto);
-                idCajaNew = em.merge(idCajaNew);
-            }
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
@@ -139,11 +86,6 @@ public class GastoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The gasto with id " + id + " no longer exists.", enfe);
             }
-            Caja idCaja = gasto.getIdCaja();
-            if (idCaja != null) {
-                idCaja.setIdGasto(null);
-                idCaja = em.merge(idCaja);
-            }
             em.remove(gasto);
             em.getTransaction().commit();
         } finally {
@@ -153,6 +95,10 @@ public class GastoJpaController implements Serializable {
         }
     }
 
+       public List findGastoCajaEntities(String idCaja) {
+        return GastoCajaEntities(true, -1, -1,idCaja);
+    }
+    
     public List<Gasto> findGastoEntities() {
         return findGastoEntities(true, -1, -1);
     }
@@ -198,5 +144,31 @@ public class GastoJpaController implements Serializable {
             em.close();
         }
     }
+    
+    
+     private List<Gasto> GastoCajaEntities(boolean all, int maxResults, int firstResult, String idCaja){
+    EntityManager em = getEntityManager();
+System.out.println("HOLAAAAAAAA");
+String queryStringBaseAll = "select * from Gasto where idCaja ='"+idCaja+"';"; //Consulta especial JPA
+
+List<Gasto> listEntradas = null;
+    try {
+
+        listEntradas = em.createNativeQuery(queryStringBaseAll, 
+    Gasto.class)
+                .getResultList();
+        em.close();
+    } catch (Exception ex) {
+em.close();
+    }
+
+    if (listEntradas  == null) {
+        listEntradas  = new ArrayList<>();
+        em.close();
+    }
+
+    return listEntradas ;
+
+}
     
 }

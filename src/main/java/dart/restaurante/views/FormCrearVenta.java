@@ -1,5 +1,6 @@
 package dart.restaurante.views;
 
+import dart.restaurante.controller.CajaJpaController;
 import dart.restaurante.controller.ClienteJpaController;
 import dart.restaurante.controller.DetalleCompraJpaController;
 import dart.restaurante.controller.ProductoJpaController;
@@ -8,6 +9,7 @@ import dart.restaurante.controller.UsuarioJpaController;
 import dart.restaurante.controller.VentaComidaJpaController;
 import dart.restaurante.controller.VentaJpaController;
 import dart.restaurante.controller.VentaProductoJpaController;
+import dart.restaurante.dao.Caja;
 import dart.restaurante.dao.Cliente;
 import dart.restaurante.dao.Comida;
 import dart.restaurante.dao.Compra;
@@ -18,6 +20,7 @@ import dart.restaurante.dao.Proveedor;
 import dart.restaurante.dao.Usuario;
 import dart.restaurante.dao.VentaProducto;
 import dart.restaurante.dao.VentaComida;
+import static dart.restaurante.views.FormApertura.idCaja;
 import static dart.restaurante.views.Inicio.SesionUsuario;
 import static dart.restaurante.views.Inicio.lblBienvenida;
 import static dart.restaurante.views.Login.idUsuario;
@@ -26,6 +29,7 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,6 +54,7 @@ public class FormCrearVenta extends javax.swing.JFrame {
     VentaProductoJpaController VentaProductoEntityManager;
     VentaComidaJpaController VentaComidaEntityManager;
     ProductoJpaController ProductoEntityManager;
+    CajaJpaController CajaEntityManager;
 
     public static String idCliente = "";
     String idVenta = "";
@@ -71,6 +76,7 @@ public class FormCrearVenta extends javax.swing.JFrame {
         VentaProductoEntityManager = new VentaProductoJpaController(emf);
         VentaComidaEntityManager = new VentaComidaJpaController(emf);
         ProductoEntityManager = new ProductoJpaController(emf);
+        CajaEntityManager = new CajaJpaController(emf);
         
         Date d = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
@@ -638,6 +644,7 @@ String[] options = {"Comida", "Producto"};
         try {
             
             VentaEntityManager.create(v);
+            ActualizarCaja();
             DatosDetalleVenta();//seteando datos detalleCompra
             JOptionPane.showMessageDialog(null, "La Compra se creó correctamente");
             FormCrearVenta fcc = new FormCrearVenta();
@@ -697,6 +704,36 @@ String[] options = {"Comida", "Producto"};
 //        }
     }
 
+    private void ActualizarCaja(){
+    Caja c = new Caja();
+    Venta v = new Venta();
+    Date d = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");    
+    
+    List<Caja> caja = CajaEntityManager.findCajaFechaEntities(sdf.format(d));
+    
+    for(Caja ca : caja){
+        c.setId(ca.getId());
+        c.setIdApertura(ca.getIdApertura());
+        c.setIdCierre(ca.getIdCierre());
+        c.setFecha(ca.getFecha());
+        c.setTotal(ca.getTotal());
+    }
+    v = VentaEntityManager.findVenta(idVenta);
+        System.out.println("caja total "+c.getTotal());
+        System.out.println("venta total "+v.getTotal());
+    Double suma = c.getTotal().doubleValue() + v.getTotal().doubleValue();
+    c.setTotal(new BigDecimal(suma.toString()));
+        try {
+            CajaEntityManager.edit(c);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "No se pudo actualizar la caja");
+            //Logger.getLogger(FormCrearVenta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    }
+    
+    
     private void DatosDetalleVenta() {
         
 
