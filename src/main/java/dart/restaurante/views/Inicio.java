@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 
@@ -148,6 +149,10 @@ public class Inicio extends javax.swing.JFrame {
         lblTituloVender3 = new javax.swing.JLabel();
         lblinfoVender3 = new javax.swing.JLabel();
         lblResumen = new javax.swing.JLabel();
+        lblinfoVender4 = new javax.swing.JLabel();
+        lblTituloVender4 = new javax.swing.JLabel();
+        lblImgVender4 = new javax.swing.JLabel();
+        lblCierre1 = new javax.swing.JLabel();
         pnlSeccionSalir = new javax.swing.JPanel();
         lblImgSalirPrograma = new javax.swing.JLabel();
         lblImgSalirLogin = new javax.swing.JLabel();
@@ -1011,7 +1016,7 @@ public class Inicio extends javax.swing.JFrame {
 
         jLabel61.setFont(new java.awt.Font("Arial", 1, 24)); // NOI18N
         jLabel61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/0facturas_icon_188468.png"))); // NOI18N
-        jLabel61.setText("Libros");
+        jLabel61.setText("Detalles");
         jLabel61.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel62.setText("jLabel20");
@@ -1049,18 +1054,18 @@ public class Inicio extends javax.swing.JFrame {
 
         lblImgVender1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
         lblImgVender1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblImgVender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 250, 110));
+        pnlSeccionFacturacion.add(lblImgVender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 180, 110));
 
         lblTituloVender1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblTituloVender1.setForeground(new java.awt.Color(153, 153, 153));
         lblTituloVender1.setText("Apertura");
         lblTituloVender1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblTituloVender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 280, 90, -1));
+        pnlSeccionFacturacion.add(lblTituloVender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, 90, -1));
 
         lblinfoVender1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblinfoVender1.setForeground(new java.awt.Color(153, 153, 153));
         lblinfoVender1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblinfoVender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 310, 210, 160));
+        pnlSeccionFacturacion.add(lblinfoVender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 320, 140, 160));
 
         lblApertura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
         lblApertura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1069,22 +1074,22 @@ public class Inicio extends javax.swing.JFrame {
                 lblAperturaMouseClicked(evt);
             }
         });
-        pnlSeccionFacturacion.add(lblApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 270, 340));
+        pnlSeccionFacturacion.add(lblApertura, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 200, 340));
 
         lblImgVender2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
         lblImgVender2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblImgVender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, 250, 110));
+        pnlSeccionFacturacion.add(lblImgVender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 170, 180, 110));
 
         lblTituloVender2.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblTituloVender2.setForeground(new java.awt.Color(153, 153, 153));
         lblTituloVender2.setText("Cierre");
         lblTituloVender2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblTituloVender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 90, -1));
+        pnlSeccionFacturacion.add(lblTituloVender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 60, -1));
 
         lblinfoVender2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblinfoVender2.setForeground(new java.awt.Color(153, 153, 153));
         lblinfoVender2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblinfoVender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 320, 210, 160));
+        pnlSeccionFacturacion.add(lblinfoVender2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 330, 140, 160));
 
         lblCierre.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
         lblCierre.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1093,22 +1098,22 @@ public class Inicio extends javax.swing.JFrame {
                 lblCierreMouseClicked(evt);
             }
         });
-        pnlSeccionFacturacion.add(lblCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 150, 270, 340));
+        pnlSeccionFacturacion.add(lblCierre, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 160, 200, 340));
 
         lblImgVender3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
         lblImgVender3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblImgVender3, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 160, 250, 110));
+        pnlSeccionFacturacion.add(lblImgVender3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 180, 110));
 
         lblTituloVender3.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         lblTituloVender3.setForeground(new java.awt.Color(153, 153, 153));
-        lblTituloVender3.setText("Resumen Venta/Compra");
+        lblTituloVender3.setText("Ventas/Compras");
         lblTituloVender3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblTituloVender3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 280, 230, -1));
+        pnlSeccionFacturacion.add(lblTituloVender3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 290, 160, -1));
 
         lblinfoVender3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         lblinfoVender3.setForeground(new java.awt.Color(153, 153, 153));
         lblinfoVender3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        pnlSeccionFacturacion.add(lblinfoVender3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 330, 210, 160));
+        pnlSeccionFacturacion.add(lblinfoVender3, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 140, 160));
 
         lblResumen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
         lblResumen.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -1117,7 +1122,31 @@ public class Inicio extends javax.swing.JFrame {
                 lblResumenMouseClicked(evt);
             }
         });
-        pnlSeccionFacturacion.add(lblResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 150, 270, 340));
+        pnlSeccionFacturacion.add(lblResumen, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 160, 200, 340));
+
+        lblinfoVender4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        lblinfoVender4.setForeground(new java.awt.Color(153, 153, 153));
+        lblinfoVender4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlSeccionFacturacion.add(lblinfoVender4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 330, 140, 160));
+
+        lblTituloVender4.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        lblTituloVender4.setForeground(new java.awt.Color(153, 153, 153));
+        lblTituloVender4.setText("Gastos");
+        lblTituloVender4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlSeccionFacturacion.add(lblTituloVender4, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 290, 70, -1));
+
+        lblImgVender4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/listar.png"))); // NOI18N
+        lblImgVender4.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pnlSeccionFacturacion.add(lblImgVender4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 180, 110));
+
+        lblCierre1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/separador.png"))); // NOI18N
+        lblCierre1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        lblCierre1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCierre1MouseClicked(evt);
+            }
+        });
+        pnlSeccionFacturacion.add(lblCierre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 200, 340));
 
         tpnlContenedor.addTab("tab7", pnlSeccionFacturacion);
 
@@ -1419,10 +1448,31 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCierreMouseClicked
 
     private void lblResumenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResumenMouseClicked
-        ListarVentas lv = new ListarVentas();
-        lv.setVisible(true);
-        this.dispose();
+        String[] options = {"Ventas", "Compras"};
+        int x = JOptionPane.showOptionDialog(null, "Ver reporte de..",
+            "Ventas - Compras",
+            JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+        System.out.println(x);
+        if(x==0){
+             ListarVentas lv = new ListarVentas();
+             lv.setVisible(true);
+             this.dispose();
+        }
+        if(x==1){
+             ListarCompras lc = new ListarCompras();
+             lc.setVisible(true);
+             this.dispose();
+        }
+        
+        
+        
+        
+       
     }//GEN-LAST:event_lblResumenMouseClicked
+
+    private void lblCierre1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCierre1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_lblCierre1MouseClicked
 
 //    public void InicioSecion(){
 //        System.out.println("id usuario "+Login.idUsuario);
@@ -1498,6 +1548,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblApertura;
     public static javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblCierre;
+    private javax.swing.JLabel lblCierre1;
     private javax.swing.JLabel lblComprar;
     private javax.swing.JLabel lblConsultaMenus;
     private javax.swing.JLabel lblConsultaProductos;
@@ -1517,6 +1568,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblImgVender1;
     private javax.swing.JLabel lblImgVender2;
     private javax.swing.JLabel lblImgVender3;
+    private javax.swing.JLabel lblImgVender4;
     private javax.swing.JLabel lblInfoConsultar;
     private javax.swing.JLabel lblInfoConsultar1;
     private javax.swing.JLabel lblInfoConsultar2;
@@ -1538,6 +1590,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblTituloVender1;
     private javax.swing.JLabel lblTituloVender2;
     private javax.swing.JLabel lblTituloVender3;
+    private javax.swing.JLabel lblTituloVender4;
     private javax.swing.JLabel lblVender;
     private javax.swing.JLabel lblinfoComprar;
     private javax.swing.JLabel lblinfoConsulta;
@@ -1547,6 +1600,7 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel lblinfoVender1;
     private javax.swing.JLabel lblinfoVender2;
     private javax.swing.JLabel lblinfoVender3;
+    private javax.swing.JLabel lblinfoVender4;
     private javax.swing.JPanel pnlClientes;
     private javax.swing.JPanel pnlDetalles;
     private javax.swing.JPanel pnlFondo;

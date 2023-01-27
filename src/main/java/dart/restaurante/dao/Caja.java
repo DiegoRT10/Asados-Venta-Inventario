@@ -6,7 +6,9 @@ package dart.restaurante.dao;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -14,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -36,6 +39,8 @@ public class Caja implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "total")
     private BigDecimal total;
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCaja")
+//    private Collection<Gasto> gastoCollection;
     @JoinColumn(name = "idApertura", referencedColumnName = "id")
     @ManyToOne
     private Apertura idApertura;
@@ -68,6 +73,14 @@ public class Caja implements Serializable {
     public void setTotal(BigDecimal total) {
         this.total = total;
     }
+
+//    public Collection<Gasto> getGastoCollection() {
+//        return gastoCollection;
+//    }
+//
+//    public void setGastoCollection(Collection<Gasto> gastoCollection) {
+//        this.gastoCollection = gastoCollection;
+//    }
 
     public Apertura getIdApertura() {
         return idApertura;

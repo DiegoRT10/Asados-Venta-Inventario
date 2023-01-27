@@ -12,6 +12,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -46,6 +48,9 @@ public class Gasto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "monto")
     private BigDecimal monto;
+    @JoinColumn(name = "idCaja", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Caja idCaja;
 //    @OneToMany(mappedBy = "idGasto")
 //    private Collection<Caja> cajaCollection;
 
@@ -86,6 +91,14 @@ public class Gasto implements Serializable {
 
     public void setMonto(BigDecimal monto) {
         this.monto = monto;
+    }
+
+    public Caja getIdCaja() {
+        return idCaja;
+    }
+
+    public void setIdCaja(Caja idCaja) {
+        this.idCaja = idCaja;
     }
 
 //    public Collection<Caja> getCajaCollection() {

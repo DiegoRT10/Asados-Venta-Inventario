@@ -132,7 +132,7 @@ public class ListarCompras extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setText("Listado de ventas");
+        jLabel1.setText("Listado de Compras");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
