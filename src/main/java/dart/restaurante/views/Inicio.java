@@ -1404,7 +1404,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_pnlServiciosMouseMoved
 
     private void lblResumenVentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblResumenVentaMouseClicked
-        
+    ListarCaja lc =new ListarCaja();
+    lc.setVisible(true);
+    this.dispose();
     }//GEN-LAST:event_lblResumenVentaMouseClicked
 
     private void lblConsultaMenusMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblConsultaMenusMouseClicked
