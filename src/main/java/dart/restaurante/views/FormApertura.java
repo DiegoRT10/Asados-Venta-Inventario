@@ -47,6 +47,8 @@ public class FormApertura extends javax.swing.JDialog {
     public static String idApertura ="";
     public static String idCierre ="";
     public static String idCaja ="";
+    private Boolean bandera = false;
+   
     
     
     public FormApertura(java.awt.Frame parent, boolean modal) {
@@ -311,8 +313,15 @@ public class FormApertura extends javax.swing.JDialog {
         if(tblListarAperturas.getRowCount() != 0){
         for (int i = 0; i < tblListarAperturas.getRowCount(); i++) {
             if(txtFechaApertura.getText().equals(tblListarAperturas.getValueAt(i, 1))){
-            JOptionPane.showMessageDialog(null, "Ya se ha aperturado");
-            }else{SaveApertura();}
+            bandera = true;
+            break;
+            }
+        }
+        
+        if(!bandera){
+            SaveApertura();
+        }else{
+        JOptionPane.showMessageDialog(null, "Ya se ha aperturado");
         }
        }else{SaveApertura();}
         }else{JOptionPane.showMessageDialog(null, "Falta el monto a agregar");}

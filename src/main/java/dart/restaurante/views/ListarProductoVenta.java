@@ -138,6 +138,7 @@ public class ListarProductoVenta extends javax.swing.JDialog {
             tblListarProductos.getColumnModel().getColumn(6).setPreferredWidth(150);
         }
 
+        txtPrecioVenta.setEditable(false);
         txtPrecioVenta.setBackground(new java.awt.Color(129, 164, 220));
         txtPrecioVenta.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txtPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);

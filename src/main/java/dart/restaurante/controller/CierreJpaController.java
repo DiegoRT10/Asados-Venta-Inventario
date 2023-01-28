@@ -8,6 +8,7 @@ import dart.restaurante.controller.exceptions.NonexistentEntityException;
 import dart.restaurante.controller.exceptions.PreexistingEntityException;
 import dart.restaurante.dao.Cierre;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -94,6 +95,10 @@ public class CierreJpaController implements Serializable {
         }
     }
 
+    public List findCierreFechaEntities(String fecha) {
+        return CierreFechaEntities(true, -1, -1,fecha);
+    }
+    
     public List<Cierre> findCierreEntities() {
         return findCierreEntities(true, -1, -1);
     }
@@ -139,5 +144,31 @@ public class CierreJpaController implements Serializable {
             em.close();
         }
     }
+    
+    
+     private List<Cierre> CierreFechaEntities(boolean all, int maxResults, int firstResult, String fecha){
+    EntityManager em = getEntityManager();
+System.out.println("HOLAAAAAAAA");
+String queryStringBaseAll = "select * from Cierre where fechaCierre='"+fecha+"';"; //Consulta especial JPA
+
+List<Cierre> listEntradas = null;
+    try {
+
+        listEntradas = em.createNativeQuery(queryStringBaseAll, 
+    Cierre.class)
+                .getResultList();
+        em.close();
+    } catch (Exception ex) {
+em.close();
+    }
+
+    if (listEntradas  == null) {
+        listEntradas  = new ArrayList<>();
+        em.close();
+    }
+
+    return listEntradas ;
+
+}
     
 }

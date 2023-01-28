@@ -1471,7 +1471,9 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_lblResumenMouseClicked
 
     private void lblCierre1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCierre1MouseClicked
-        // TODO add your handling code here:
+        FormGasto fg = new FormGasto(this, true);
+        fg.setVisible(true);
+        
     }//GEN-LAST:event_lblCierre1MouseClicked
 
 //    public void InicioSecion(){

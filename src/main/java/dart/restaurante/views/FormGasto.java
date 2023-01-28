@@ -195,7 +195,6 @@ public class FormGasto extends javax.swing.JDialog {
         lblCodin8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblCodin8.setText("Monto");
 
-        txtMonto.setEditable(false);
         txtMonto.setBackground(new java.awt.Color(129, 164, 220));
         txtMonto.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         txtMonto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -375,7 +374,7 @@ public class FormGasto extends javax.swing.JDialog {
     
     for(Gasto a : gasto){
            
-        Object newRow[] = {a.getId(),a.getIdCaja(),a.getDescripcion(),sdf.format(a.getFechaGasto()),a.getMonto()};
+        Object newRow[] = {a.getId(),a.getIdCaja().getId(),a.getDescripcion(),sdf.format(a.getFechaGasto()),a.getMonto()};
         model.addRow(newRow);
         
     } 

@@ -8,6 +8,7 @@ import dart.restaurante.controller.AperturaJpaController;
 import dart.restaurante.controller.CierreJpaController;
 import dart.restaurante.dao.Apertura;
 import dart.restaurante.dao.Cierre;
+import static dart.restaurante.views.FormApertura.tblListarAperturas;
 
 //import dart.restaurante.views.ListarInventario.tblListarProductos;
 import java.awt.Font;
@@ -39,6 +40,7 @@ public class FormCierre extends javax.swing.JDialog {
      */
     EntityManagerFactory emf;
    CierreJpaController CierreEntityManager;
+   private Boolean bandera = false;
     public static TableRowSorter<DefaultTableModel> sorter;
     public FormCierre(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -296,14 +298,31 @@ public class FormCierre extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        Double Monto = 0.0;
+        
         if(!txtMonto.getText().isEmpty()){
         if(tblListarCierres.getRowCount() != 0){
         for (int i = 0; i < tblListarCierres.getRowCount(); i++) {
             if(txtFechaCierre.getText().equals(tblListarCierres.getValueAt(i, 1))){
-            JOptionPane.showMessageDialog(null, "Ya se ha aperturado");
-            }else{SaveApertura();}
+            Monto = Double.valueOf(tblListarCierres.getValueAt(i, 2).toString());
+                if(Monto == 0){
+                    bandera = false;
+                    break;
+            }else{
+                bandera = true;
+                break;
+                }
+            }
         }
-       }else{SaveApertura();}
+        
+        if(!bandera){
+            
+            SaveCierre();
+          
+        }else{
+        JOptionPane.showMessageDialog(null, "Ya se ha ha realizado el cierre");
+        }
+       }else{SaveCierre();}
         }else{JOptionPane.showMessageDialog(null, "Falta el monto a agregar");}
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -359,30 +378,53 @@ public class FormCierre extends javax.swing.JDialog {
 
     }
     
-    private void SaveApertura(){
+    private void SaveCierre(){
     
+    Date d = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");     
+    List<Cierre> cierre = CierreEntityManager.findCierreFechaEntities(sdf.format(d));    
     Cierre c = new Cierre();
-    c.setId(UUID.randomUUID().toString());
-    try {
-            //seteando la fecha
-            Date dt = new SimpleDateFormat("dd/MM/yyyy")
-                    .parse(txtFechaCierre.getText());
-            c.setFechaCierre(dt);
-        } catch (ParseException ex) {
-            //Logger.getLogger(CrearFactura.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Fecha mal ingresada");
-        }
-    BigDecimal monto = new BigDecimal(txtMonto.getText());
-    c.setMonto(monto);
     
+    for(Cierre cr : cierre){
+        c.setId(cr.getId());
+        c.setFechaCierre(cr.getFechaCierre());
+    }
+    c.setMonto(new BigDecimal(txtMonto.getText()));
         try {
-            CierreEntityManager.create(c);
-            JOptionPane.showMessageDialog(null, "Se aperturo, suerte en la venta");
+            CierreEntityManager.edit(c);
+            JOptionPane.showMessageDialog(null, "Se realizo el cierre");
             ListarProductos();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "No se creo la apertura");
-            //Logger.getLogger(FormApertura.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "No se pudo realizar el cierre");
+            //Logger.getLogger(FormCierre.class.getName()).log(Level.SEVERE, null, ex);
         }
+            
+            
+            
+            
+            
+//    c.setId(UUID.randomUUID().toString());
+//    try {
+//            //seteando la fecha
+//            Date dt = new SimpleDateFormat("dd/MM/yyyy")
+//                    .parse(txtFechaCierre.getText());
+//            c.setFechaCierre(dt);
+//        } catch (ParseException ex) {
+//            //Logger.getLogger(CrearFactura.class.getName()).log(Level.SEVERE, null, ex);
+//            JOptionPane.showMessageDialog(null, "Fecha mal ingresada");
+//        }
+//    BigDecimal monto = new BigDecimal(txtMonto.getText());
+//    c.setMonto(monto);
+//    
+//        try {
+//            CierreEntityManager.create(c);
+//            JOptionPane.showMessageDialog(null, "Se aperturo, suerte en la venta");
+//            ListarProductos();
+//        } catch (Exception ex) {
+//            JOptionPane.showMessageDialog(null, "No se creo la apertura");
+//            //Logger.getLogger(FormApertura.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
     
     
     }
